@@ -5,6 +5,7 @@ const { auth } = require("../middleware/auth");
 
 const router = express.Router();
 
+//create a profile
 router.post("/", auth, async (request, response) => {
 	const error = validateUserProfile(request.body);
 
@@ -20,6 +21,7 @@ router.post("/", auth, async (request, response) => {
 
 	const profile = new Profile({
 		...request.body,
+		user: request.user,
 	});
 
 	try {
@@ -30,12 +32,26 @@ router.post("/", auth, async (request, response) => {
 	}
 });
 
+//get a profile
 router.get("/:id", async (request, response) => {
 	try {
 		const profile = await Profile.findOne({
 			user: request.params.id,
 		}).populate("user");
 		response.send(profile);
+	} catch (error) {
+		response.status(500).send(error);
+	}
+});
+
+//edit a profile
+router.put("/", auth, async (request, response) => {
+	try {
+		await Profile.findOneAndUpdate(
+			{ user: request.user },
+			{ ...request.body }
+		);
+		response.send({ message: "updated" });
 	} catch (error) {
 		response.status(500).send(error);
 	}

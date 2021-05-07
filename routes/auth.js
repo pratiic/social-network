@@ -6,9 +6,13 @@ const {
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { auth } = require("../middleware/auth");
+const Post = require("../models/Post");
+const Profile = require("../models/Profile");
 
 const router = express.Router();
 
+//register
 router.post("/register", async (request, response) => {
 	const error = validateUserRegistration(request.body);
 
@@ -38,6 +42,7 @@ router.post("/register", async (request, response) => {
 	}
 });
 
+//login
 router.post("/login", async (request, response) => {
 	const error = validateUserLogin(request.body);
 
@@ -75,6 +80,18 @@ router.post("/login", async (request, response) => {
 		password: user.password,
 		token,
 	});
+});
+
+//delete a user
+router.delete("/delete", auth, async (request, response) => {
+	try {
+		await User.findByIdAndDelete(request.user);
+		await Post.deleteMany({ user: request.user });
+		await Profile.deleteMany({ user: request.user });
+		response.send({ message: "deleted" });
+	} catch (error) {
+		response.status(500).send(error);
+	}
 });
 
 module.exports = router;

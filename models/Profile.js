@@ -18,6 +18,16 @@ const profileSchema = new mongoose.Schema({
 		type: mongoose.ObjectId,
 		ref: "User",
 	},
+	friendRequests: [
+		{
+			type: mongoose.ObjectId,
+		},
+	],
+	friends: [
+		{
+			type: mongoose.ObjectId,
+		},
+	],
 });
 
 module.exports = mongoose.model("Profile", profileSchema);
