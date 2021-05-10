@@ -1,6 +1,8 @@
 const express = require("express");
+const { connect } = require("mongodb");
 require("dotenv").config();
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 const app = express();
 
@@ -12,7 +14,18 @@ mongoose.connect(
 	}
 );
 
+const connection = mongoose.connection;
+
+connection.once("open", () => {
+	const myChangeStream = connection.collection("users").watch();
+
+	myChangeStream.on("change", (change) => {
+		console.log(change.operationType);
+	});
+});
+
 app.use(express.json());
+app.use(cors());
 
 app.use("/api/user", require("./routes/auth"));
 app.use("/api/profile", require("./routes/profile"));

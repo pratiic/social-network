@@ -1,0 +1,47 @@
+@import "../../scss/variables";
+
+button {
+	background-color: $color-red;
+	outline: none;
+	border: none;
+	padding: 0.2rem 1.2rem;
+	color: $color-light-cyan;
+	font-size: 1.55rem;
+	text-transform: capitalize;
+	font-family: inherit;
+	border-radius: 5px;
+	cursor: pointer;
+
+	&:active {
+		background-color: darken($color-red, 15%);
+	}
+
+	&.full {
+		width: 100%;
+	}
+
+	&.outlined {
+		border: 1px solid $color-red;
+		background-color: transparent;
+		color: $color-red;
+
+		&:hover {
+			background-color: $color-red;
+			color: $color-light-cyan;
+		}
+
+		&:active {
+			background-color: darken($color-red, 15%);
+		}
+	}
+
+	&.white {
+		border: 1px solid $color-light-cyan;
+		color: white;
+
+		&:active {
+			color: $color-powder-blue;
+			border: 1px solid $color-powder-blue;
+		}
+	}
+}

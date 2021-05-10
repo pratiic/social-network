@@ -9,6 +9,7 @@ const jwt = require("jsonwebtoken");
 const { auth } = require("../middleware/auth");
 const Post = require("../models/Post");
 const Profile = require("../models/Profile");
+const gravatar = require("gravatar");
 
 const router = express.Router();
 
@@ -29,9 +30,16 @@ router.post("/register", async (request, response) => {
 	const salt = await bcrypt.genSalt(10);
 	const hash = await bcrypt.hash(request.body.password, salt);
 
+	const imageURL = gravatar.url(request.body.email, {
+		protocol: "https",
+		s: "400",
+		d: "retro",
+	});
+
 	const user = new User({
 		...request.body,
 		password: hash,
+		profilePictureURL: imageURL,
 	});
 
 	try {

@@ -1,0 +1,32 @@
+.wrapper {
+	max-width: 1400px;
+	padding: 0 2.5rem;
+	margin: auto;
+}
+
+.form-container {
+	padding-top: 2rem;
+
+	.form-header {
+		text-align: center;
+		color: $color-prussian-blue;
+		margin-bottom: 3rem;
+
+		.title {
+			text-transform: uppercase;
+		}
+	}
+}
+
+.form {
+	width: 30rem;
+	margin: auto;
+
+	.custom-input:last-of-type {
+		margin-bottom: 3.5rem;
+	}
+
+	button {
+		padding: 0.55rem 1rem;
+	}
+}
