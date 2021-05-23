@@ -11,7 +11,13 @@ const Notification = ({ text, notification }) => {
 		<div
 			className={`notification text-small ${
 				notification.showNotification ? "show" : null
-			} ${notification.successTypeNotification ? "success" : "failure"}`}
+			} ${
+				notification.successTypeNotification === "true"
+					? "success"
+					: notification.successTypeNotification === "false"
+					? "failure"
+					: null
+			}`}
 		>
 			{notification.successTypeNotification === true ? (
 				<TickIcon className="icon white" />
