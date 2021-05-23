@@ -52,7 +52,7 @@ const App = ({ currentChatUser }) => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		const socket = io("http://localhost:5000");
+		const socket = io("/");
 
 		socket.on("profileUpdated", (data) => {
 			if (currentUserProfile) {
@@ -66,7 +66,7 @@ const App = ({ currentChatUser }) => {
 	}, [currentUserProfile]);
 
 	useEffect(() => {
-		const socket = io("http://localhost:5000");
+		const socket = io("/");
 
 		socket.on("chatAdded", (data) => {
 			console.log(currentUser);
@@ -96,7 +96,7 @@ const App = ({ currentChatUser }) => {
 	}, [currentUser]);
 
 	useEffect(() => {
-		const socket = io("http://localhost:5000");
+		const socket = io("/");
 
 		socket.on("messageAdded", (data) => {
 			if (currentUser) {

@@ -77,7 +77,7 @@ const Chat = ({ messages, chatID, currentChatUser }) => {
 	}, [chatID]);
 
 	useEffect(() => {
-		setSocket(io("http://localhost:5000"));
+		setSocket(io("/"));
 	}, []);
 
 	const handleFormSubmit = (event, message) => {

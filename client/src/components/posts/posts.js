@@ -51,7 +51,7 @@ const Posts = ({ posts, newNotifications }) => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		const socket = io("http://localhost:5000");
+		const socket = io("/");
 
 		socket.on("postLikedOrDisliked", (data) => {
 			dispatch(updatePost(data));
@@ -78,7 +78,7 @@ const Posts = ({ posts, newNotifications }) => {
 	}, []);
 
 	useEffect(() => {
-		const socket = io("http://localhost:5000");
+		const socket = io("/");
 
 		socket.on("notificationAdded", (notification) => {
 			if (notification.to == currentUser._id) {
