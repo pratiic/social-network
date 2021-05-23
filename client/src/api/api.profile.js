@@ -1,4 +1,4 @@
-const baseURL = "http://localhost:5000/api/profile";
+const baseURL = "/api/profile";
 
 export const getProfile = async (userID, token) => {
 	const result = await fetch(`${baseURL}/${userID}`, {

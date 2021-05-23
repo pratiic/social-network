@@ -1,4 +1,4 @@
-const baseURL = "http://localhost:5000/api/notifications";
+const baseURL = "/api/notifications";
 
 export const getNotifications = async (token) => {
 	const result = await fetch(`${baseURL}`, {

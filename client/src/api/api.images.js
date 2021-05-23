@@ -1,4 +1,4 @@
-const baseURL = "http://localhost:5000/api/images";
+const baseURL = "/api/images";
 
 export const addProfilePicture = async (formData, token) => {
 	const result = await fetch(`${baseURL}/user`, {

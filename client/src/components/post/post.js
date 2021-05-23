@@ -105,10 +105,7 @@ const Post = ({
 			{image ? (
 				<div className="post-image" onClick={handlePostClick}>
 					<ImageIcon className="background" />
-					<img
-						src={`http://localhost:5000/api/images/post/${_id}`}
-						alt="post-imag"
-					/>
+					<img src={`/api/images/post/${_id}`} alt="post-imag" />
 				</div>
 			) : null}
 			{description ? (

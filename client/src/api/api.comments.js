@@ -1,4 +1,4 @@
-const baseURL = "http://localhost:5000/api/comments";
+const baseURL = "/api/comments";
 
 export const addComment = async (postID, comment, token) => {
 	const commentToAdd = JSON.stringify(comment);

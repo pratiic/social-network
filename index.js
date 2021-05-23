@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const socketIO = require("socket.io");
 const http = require("http");
+const path = require("path");
 
 const port = process.env.PORT || 5000;
 
@@ -178,6 +179,16 @@ connection.once("open", () => {
 		}
 	});
 });
+
+if (process.env.NODE_ENV === "production") {
+	app.use(express.static("client/build"));
+
+	app.get("*", (request, response) => {
+		response.sendFile(
+			path.resolve(__dirname, "client", "build", "index..html")
+		);
+	});
+}
 
 server.listen(port, () => {
 	console.log(`the server is listening at the port ${port}`);

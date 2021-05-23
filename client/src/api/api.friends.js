@@ -1,4 +1,4 @@
-const baseURL = "http://localhost:5000/api/friends";
+const baseURL = "/api/friends";
 
 export const addFriend = async (userID, token) => {
 	const result = await fetch(`${baseURL}/requests/${userID}`, {

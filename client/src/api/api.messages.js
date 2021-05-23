@@ -1,4 +1,4 @@
-const baseURL = "http://localhost:5000/api/messages";
+const baseURL = "/api/messages";
 
 export const createMessage = async (chatID, message, token) => {
 	const result = await fetch(`${baseURL}/${chatID}`, {

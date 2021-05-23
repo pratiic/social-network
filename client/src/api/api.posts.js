@@ -1,4 +1,4 @@
-const baseURL = "http://localhost:5000/api";
+const baseURL = "/api";
 
 export const getPosts = async (token) => {
 	const result = await fetch(`${baseURL}/posts`, {
