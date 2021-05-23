@@ -1,0 +1,11 @@
+@import "../../scss/variables";
+
+.form-header {
+	text-align: center;
+	color: $color-prussian-blue;
+	margin-bottom: 3rem;
+
+	.title {
+		text-transform: uppercase;
+	}
+}

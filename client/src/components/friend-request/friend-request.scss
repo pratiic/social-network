@@ -1,0 +1,25 @@
+@import "../../scss/variables";
+
+.friend-request {
+	background-color: $color-queen-blue;
+	border-radius: 5px;
+	margin-bottom: 1.5rem;
+
+	.user {
+		margin-bottom: 0px;
+		border-radius: 0px;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+	}
+
+	.friend-request-controls {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 0.5rem 0;
+
+		button {
+			margin-left: 0.75rem;
+		}
+	}
+}

@@ -4,14 +4,14 @@ Joi.objectId = require("joi-objectid")(Joi);
 
 const userProfileSchema = Joi.object({
 	address: Joi.string().required(),
-	hobbies: Joi.array(),
 	description: Joi.string().min(75).required(),
 	dateOfBirth: Joi.date().required(),
 	job: Joi.string().required(),
-	relationshipStatus: Joi.string(),
-	likes: Joi.array(),
-	dislikes: Joi.array(),
-	education: Joi.string(),
+	hobbies: Joi.string().allow(""),
+	relationshipStatus: Joi.string().allow(""),
+	education: Joi.string().allow(""),
+	likes: Joi.string().allow(""),
+	dislikes: Joi.string().allow(""),
 	user: Joi.objectId(),
 });
 

@@ -1,0 +1,129 @@
+@import "../../scss/variables";
+
+.post {
+	border: 1px solid $color-powder-blue;
+	border-radius: 5px;
+	color: $color-prussian-blue;
+	width: 100%;
+	margin: 0 auto 2.5rem auto;
+
+	.post-header,
+	.profile-info,
+	.post-control {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.post-header {
+		border-bottom: 1px solid $color-powder-blue;
+		padding: 0.3rem 0.75rem;
+		// background-color: $color-powder-blue;
+
+		.profile-info {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			cursor: pointer;
+
+			& > *:not(:first-child) {
+				margin-left: 1rem;
+			}
+		}
+
+		.date {
+			color: $color-queen-blue;
+
+			@media screen and (max-width: 450px) {
+				display: none;
+			}
+		}
+	}
+
+	.post-image,
+	.post-description {
+		cursor: pointer;
+	}
+
+	.post-image {
+		background-color: $color-powder-blue;
+		position: relative;
+
+		.background {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			height: 50%;
+			width: 50%;
+		}
+
+		img {
+			position: relative;
+			z-index: 1;
+			width: 100%;
+			min-height: 25rem;
+			object-fit: cover;
+		}
+	}
+
+	.post-description,
+	.post-footer {
+		padding: 0.5rem 0.75rem;
+		background-color: $color-powder-blue;
+	}
+
+	.post-description {
+		white-space: pre-wrap;
+		overflow: hidden;
+	}
+
+	.post-footer {
+		&.separate {
+			border-top: 1px solid $color-light-cyan;
+		}
+
+		.post-info {
+			justify-content: space-between;
+			align-items: center;
+			padding: 0 0 1.1rem 0;
+			display: none;
+
+			.date {
+				color: $color-queen-blue;
+			}
+
+			@media screen and (max-width: 450px) {
+				display: flex;
+			}
+		}
+
+		.post-controls {
+			display: flex;
+
+			.content-control:not(:last-child) {
+				margin-right: 3.5rem;
+
+				// @media screen and (max-width: 450px) {
+				// 	margin-right: 3rem;
+				// }
+
+				// @media screen and (max-width: 350px) {
+				// 	margin-right: 2.5rem;
+				// }
+			}
+
+			@media screen and (max-width: 450px) {
+				.time {
+					display: none;
+				}
+			}
+		}
+
+		.time {
+			width: fit-content;
+			margin-left: auto;
+			color: $color-queen-blue;
+		}
+	}
+}

@@ -15,6 +15,7 @@ const postSchema = new mongoose.Schema(
 		],
 		user: {
 			type: mongoose.ObjectId,
+			ref: "User",
 		},
 		comments: [
 			{
@@ -22,6 +23,15 @@ const postSchema = new mongoose.Schema(
 				ref: "Comment",
 			},
 		],
+		for: [
+			{
+				type: mongoose.ObjectId,
+			},
+		],
+		image: {
+			type: Boolean,
+			default: false,
+		},
 	},
 	{ timestamps: true }
 );

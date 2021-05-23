@@ -1,0 +1,34 @@
+@import "../../scss/variables";
+
+.notification {
+	display: none;
+	position: fixed;
+	left: 50%;
+	top: 1.5rem;
+	transform: translateX(-50%);
+	background-color: $color-queen-blue;
+	color: $color-light-cyan;
+	padding: 0.3rem 1.5rem;
+	border-radius: 5px;
+	box-shadow: 0 0 0.75rem 0 $color-queen-blue;
+	justify-content: center;
+	align-items: center;
+	z-index: 1;
+	white-space: nowrap;
+
+	&.failure {
+		background-color: $color-red;
+	}
+
+	&::first-letter {
+		text-transform: uppercase;
+	}
+
+	&.show {
+		display: flex;
+	}
+
+	svg {
+		margin-right: 0.75rem;
+	}
+}

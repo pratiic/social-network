@@ -4,10 +4,20 @@
 	.welcome-header {
 		color: $color-prussian-blue;
 		text-align: center;
-		margin: 2.5rem 0;
+		margin: 2rem 0;
 
 		.heading {
 			margin-bottom: 0.5rem;
+		}
+
+		.sub-heading {
+			&::first-letter {
+				text-transform: uppercase;
+			}
+		}
+
+		@media screen and (max-width: 700px) {
+			margin: 1.7rem 0;
 		}
 	}
 
@@ -22,13 +32,14 @@
 		}
 
 		.create-account {
-			color: $color-red;
+			color: $color-queen-blue;
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 
 			p {
 				margin-bottom: 1.5rem;
+				text-align: center;
 			}
 
 			button {

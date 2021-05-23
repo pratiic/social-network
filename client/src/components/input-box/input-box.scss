@@ -1,0 +1,106 @@
+@import "../../scss/variables";
+
+.input-box {
+	width: 100%;
+
+	.input-group {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+		border: 1px solid $color-powder-blue;
+		height: 3rem;
+		padding: 0 0.5rem;
+		border-radius: 5px;
+		position: relative;
+
+		input {
+			outline: none;
+			border: none;
+			flex: 1 1 auto;
+			margin-right: 1.5rem;
+			color: $color-prussian-blue;
+			font-family: inherit;
+		}
+
+		::-webkit-input-placeholder {
+			color: $color-queen-blue;
+		}
+
+		.buttons {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			.emoji-icon {
+				height: 1.75rem;
+				width: 1.75rem;
+			}
+
+			& > *:not(:first-child) {
+				margin-left: 1rem;
+			}
+		}
+	}
+
+	.emoji-picker-react {
+		height: 100%;
+		width: 100%;
+		box-shadow: none;
+		background-color: $color-powder-blue-darker;
+		border: none;
+		border-radius: 5px;
+		font-family: inherit;
+
+		.emoji-categories {
+			button {
+				opacity: 1;
+			}
+		}
+
+		.emoji-scroll-wrapper {
+			&::-webkit-scrollbar {
+				width: 0.75rem;
+			}
+
+			&::-webkit-scrollbar-thumb {
+				background-color: $color-queen-blue;
+			}
+
+			::before {
+				background-color: $color-powder-blue-darker;
+				color: $color-prussian-blue;
+				line-height: 1.35;
+				padding: 0.5rem 0;
+			}
+		}
+
+		.emoji-search {
+			background-color: $color-powder-blue;
+			border: 1px solid $color-queen-blue;
+			color: $color-prussian-blue;
+			height: 2.75rem;
+			border-radius: 5px;
+			margin-top: 1rem;
+			margin-bottom: 1.5rem;
+
+			&:focus {
+				border: 1px solid $color-prussian-blue;
+			}
+		}
+
+		.emoji-group {
+			margin-bottom: 0.7rem;
+
+			.emoji {
+				button {
+					color: $color-queen-blue;
+				}
+			}
+		}
+
+		.skin-tones-list {
+			display: none;
+		}
+	}
+}

@@ -1,0 +1,46 @@
+@import "../../scss/variables";
+
+.messages-container {
+	flex: 1 1 auto;
+	position: relative;
+	padding: 0.7rem 0.75rem;
+	overflow-y: scroll;
+
+	&::-webkit-scrollbar {
+		width: 0rem;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: transparent;
+	}
+
+	.human,
+	.info-message {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	.user-typing {
+		width: fit-content;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+
+		.profile-picture {
+			margin-right: 0.75rem;
+		}
+
+		.text {
+			border: 1px solid $color-queen-blue;
+			border-radius: 5px;
+			padding: 0.3rem 0.75rem;
+			color: $color-queen-blue;
+		}
+	}
+
+	@media screen and (max-width: 750px) {
+		padding: 0.7rem 1rem;
+	}
+}

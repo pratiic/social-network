@@ -2,6 +2,7 @@ const express = require("express");
 const { validateUserProfile } = require("../validation/profile-validation");
 const Profile = require("../models/Profile");
 const { auth } = require("../middleware/auth");
+const multer = require("multer");
 
 const router = express.Router();
 
@@ -10,13 +11,13 @@ router.post("/", auth, async (request, response) => {
 	const error = validateUserProfile(request.body);
 
 	if (error) {
-		return response.status(400).send({ message: error });
+		return response.status(400).send({ error: error });
 	}
 
 	const profileExists = await Profile.findOne({ user: request.user });
 
 	if (profileExists) {
-		return response.status(400).send({ message: "profile already exists" });
+		return response.status(400).send({ error: "profile already exists" });
 	}
 
 	const profile = new Profile({
@@ -33,11 +34,16 @@ router.post("/", auth, async (request, response) => {
 });
 
 //get a profile
-router.get("/:id", async (request, response) => {
+router.get("/:id", auth, async (request, response) => {
 	try {
 		const profile = await Profile.findOne({
 			user: request.params.id,
 		}).populate("user");
+
+		if (!profile) {
+			return response.status(400).send({ error: "profile not found" });
+		}
+
 		response.send(profile);
 	} catch (error) {
 		response.status(500).send(error);
@@ -47,11 +53,11 @@ router.get("/:id", async (request, response) => {
 //edit a profile
 router.put("/", auth, async (request, response) => {
 	try {
-		await Profile.findOneAndUpdate(
+		const editedProfile = await Profile.findOneAndUpdate(
 			{ user: request.user },
 			{ ...request.body }
 		);
-		response.send({ message: "updated" });
+		response.send(editedProfile);
 	} catch (error) {
 		response.status(500).send(error);
 	}

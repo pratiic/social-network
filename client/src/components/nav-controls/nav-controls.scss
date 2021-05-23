@@ -1,0 +1,66 @@
+@import "../../scss/variables";
+
+.nav-controls {
+	position: absolute;
+	z-index: 5;
+	right: 2.5rem;
+	top: 50%;
+	transform: translateY(-50%);
+	display: none;
+
+	& > *:not(:first-child) {
+		margin-left: 3.5rem;
+
+		@media screen and (max-width: 350px) {
+			margin-left: 2.7rem;
+		}
+	}
+
+	svg {
+		height: 2rem;
+		width: 2rem;
+
+		@media screen and (max-width: 350px) {
+			height: 1.85rem;
+			width: 1.85rem;
+		}
+	}
+
+	.nav-control {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		&.active {
+			svg {
+				path {
+					fill: $color-prussian-blue;
+				}
+			}
+		}
+	}
+
+	@media screen and (max-width: 800px) {
+		&.show {
+			display: flex;
+		}
+
+		.nav-control {
+			&.active {
+				svg {
+					path {
+						fill: $color-prussian-blue;
+					}
+				}
+			}
+		}
+	}
+
+	@media screen and (max-width: 500px) {
+		right: 2rem;
+	}
+
+	@media screen and (max-width: 400px) {
+		right: 1.5rem;
+	}
+}

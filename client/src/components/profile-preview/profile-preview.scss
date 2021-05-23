@@ -1,0 +1,19 @@
+@import "../../scss/variables";
+
+.profile-preview {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+
+	.username {
+		color: $color-queen-blue;
+		margin-right: 0.7rem;
+	}
+
+	&.active {
+		.username {
+			color: $color-prussian-blue;
+		}
+	}
+}

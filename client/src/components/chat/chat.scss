@@ -1,0 +1,34 @@
+@import "../../scss/variables";
+
+.chat {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	border-left: 1px solid $color-powder-blue;
+	border-right: 1px solid $color-powder-blue;
+
+	.input-box {
+		padding: 0 0.75rem 0.75rem 0.75rem;
+
+		.input-group {
+			border: 1px solid $color-queen-blue;
+			height: 3.5rem;
+		}
+	}
+
+	.user-not-available {
+		background-color: $color-powder-blue;
+		padding: 0.5rem 0;
+		text-align: center;
+		color: $color-prussian-blue;
+
+		&::first-letter {
+			text-transform: uppercase;
+		}
+	}
+
+	@media screen and (max-width: 750px) {
+		border-left: none;
+		border-right: none;
+	}
+}

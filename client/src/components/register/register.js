@@ -1,12 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+
+import { showNotification } from "../../redux/notification/notification.actions";
 
 import { loginOrRegister } from "../../api/api.user";
-
 import { setFieldError, clearFieldErrors } from "../utils/utils.forms";
+
+import { ReactComponent as ChevronRightIcon } from "../../assets/icons/chevron-right.svg";
 
 import CustomInput from "../custom-input/custom-input";
 import Button from "../button/button";
+import FormHeader from "../form-header/form-header";
 
 class Register extends React.Component {
 	constructor() {
@@ -89,6 +94,12 @@ class Register extends React.Component {
 					"username",
 					"username must be atleast 5 characters"
 				);
+			} else {
+				this.props.history.push("/signin");
+				this.props.showNotification(
+					true,
+					"you are successfully registered"
+				);
 			}
 
 			this.setState({ registering: false });
@@ -98,15 +109,12 @@ class Register extends React.Component {
 	render() {
 		return (
 			<div className="register form-container">
-				<div className="form-header">
-					<p className="title text-big">
-						register in to social network
-					</p>
-					<p className="subtitle text-small">
-						Already have an account?
-						<Link to="/signin"> sign in</Link>
-					</p>
-				</div>
+				<FormHeader
+					title="register in to social network"
+					subtitle="Already have an account?"
+					link="sign in"
+					linkTo="signin"
+				/>
 				<form
 					className="register form"
 					onSubmit={this.handleFormSubmit}
@@ -144,6 +152,7 @@ class Register extends React.Component {
 						inputChangeHandler={this.handleInputChange}
 					/>
 					<Button type="submit" full>
+						<ChevronRightIcon className="icon" />{" "}
 						{this.state.registering ? "registering" : "register"}
 					</Button>
 				</form>
@@ -152,4 +161,12 @@ class Register extends React.Component {
 	}
 }
 
-export default Register;
+export const mapDispatchToProps = (dispatch) => {
+	return {
+		showNotification: (notificationType, notificationText) => {
+			dispatch(showNotification(notificationType, notificationText));
+		},
+	};
+};
+
+export default withRouter(connect(null, mapDispatchToProps)(Register));

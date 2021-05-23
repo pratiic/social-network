@@ -1,0 +1,12 @@
+.emoji-picker-container {
+	position: absolute;
+	height: 33rem;
+	width: 40rem;
+	top: -34.5rem;
+	right: 0;
+	display: none;
+
+	&.show {
+		display: block;
+	}
+}

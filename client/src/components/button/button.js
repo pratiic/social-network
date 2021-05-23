@@ -2,7 +2,21 @@ import React from "react";
 
 import "./button.scss";
 
-const Button = ({ children, type, full, outlined, white, clickHandler }) => {
+const Button = ({
+	children,
+	type,
+	full,
+	outlined,
+	white,
+	bigger,
+	smaller,
+	secondary,
+	active,
+	red,
+	align,
+	className,
+	clickHandler,
+}) => {
 	const getButtonClassName = () => {
 		let buttonClassName = "button";
 
@@ -16,6 +30,34 @@ const Button = ({ children, type, full, outlined, white, clickHandler }) => {
 
 		if (white) {
 			buttonClassName += " white";
+		}
+
+		if (bigger) {
+			buttonClassName += " bigger";
+		}
+
+		if (smaller) {
+			buttonClassName += " smaller";
+		}
+
+		if (secondary) {
+			buttonClassName += " secondary";
+		}
+
+		if (active) {
+			buttonClassName += " active";
+		}
+
+		if (red) {
+			buttonClassName += " red";
+		}
+
+		if (align) {
+			buttonClassName += ` ${align}`;
+		}
+
+		if (className) {
+			buttonClassName += ` ${className}`;
 		}
 
 		return buttonClassName;

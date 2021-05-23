@@ -1,0 +1,14 @@
+@import "../../scss/variables";
+
+.reload {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 0.75rem;
+	cursor: pointer;
+
+	.text {
+		color: $color-queen-blue;
+		margin-right: 0.7rem;
+	}
+}

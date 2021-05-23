@@ -1,13 +1,25 @@
 .text-bigger {
-	font-size: 3rem;
+	font-size: 2.7rem;
+
+	@media screen and (max-width: 500px) {
+		font-size: 2.5rem;
+	}
 }
 
 .text-big {
-	font-size: 2.5rem;
+	font-size: 2.35rem;
+
+	@media screen and (max-width: 500px) {
+		font-size: 2.2rem;
+	}
 }
 
 .text-medium {
 	font-size: 2rem;
+
+	@media screen and (max-width: 500px) {
+		font-size: 1.7rem;
+	}
 }
 
 .text-small {
@@ -16,6 +28,10 @@
 
 .text-smaller {
 	font-size: 1.5rem;
+}
+
+.text-smallest {
+	font-size: 1.35rem;
 }
 
 .capitalize {

@@ -13,10 +13,10 @@ const Welcome = () => {
 	return (
 		<div className="welcome">
 			<div className="welcome-header">
-				<p className="heading text-bigger uppercase">
+				<p className="heading text-bigger capitalize">
 					welcome to social network
 				</p>
-				<p className="sub-heading text-medium uppercase">
+				<p className="sub-heading text-medium">
 					find your friends and have a lot of fun
 				</p>
 			</div>

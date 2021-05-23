@@ -1,0 +1,147 @@
+@import "../../scss/variables";
+
+.navbar {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	transform: translateX(0);
+	transition: transform 170ms ease-in;
+
+	& > * {
+		margin-left: 4.5rem;
+	}
+
+	& > *:last-child {
+		margin-left: 3rem;
+	}
+
+	.nav-link {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: $color-queen-blue;
+		font-weight: 500;
+		position: relative;
+
+		svg {
+			display: none;
+		}
+
+		.count {
+			margin-left: 0.3rem;
+		}
+
+		&.active {
+			color: $color-prussian-blue;
+
+			&::after {
+				content: "";
+				position: absolute;
+				height: 2px;
+				width: 100%;
+				background-color: $color-prussian-blue;
+				left: 0;
+				bottom: -0.35rem;
+
+				@media screen and (max-width: 800px) {
+					display: none;
+				}
+			}
+		}
+
+		&.display {
+			color: $color-prussian-blue;
+		}
+
+		&:hover {
+			color: $color-prussian-blue;
+		}
+
+		&:active {
+			color: $color-queen-blue;
+		}
+	}
+
+	@media screen and (max-width: 800px) {
+		position: fixed;
+		flex-direction: column;
+		right: 0;
+		top: 0;
+		padding-top: 4rem;
+		background-color: $color-powder-blue;
+		height: 100vh;
+		justify-content: flex-start;
+		align-items: flex-start;
+		z-index: 3;
+		box-shadow: 0 0 0.4rem 0 rgba(70, 117, 153, 0.5);
+
+		&.hide {
+			transform: translateX(100%);
+		}
+
+		& > * {
+			margin-left: 0;
+			width: 100%;
+			border-bottom: 1px solid $color-powder-blue-darker;
+			padding: 0.7rem 7rem;
+
+			@media screen and (max-width: 500px) {
+				padding: 0.7rem 5rem;
+			}
+
+			@media screen and (max-width: 350px) {
+				padding: 0.7rem 4rem;
+			}
+		}
+
+		& > *:last-child {
+			margin-left: 0;
+		}
+
+		.nav-link {
+			justify-content: flex-start;
+			font-size: 1.55rem;
+			text-transform: lowercase;
+
+			svg {
+				display: block;
+				margin-right: 0.75rem;
+			}
+
+			&.active {
+				background-color: $color-powder-blue-darker;
+
+				svg {
+					path {
+						fill: $color-prussian-blue;
+					}
+				}
+			}
+
+			.count {
+				margin-left: 0.75rem;
+				font-size: 1.3rem;
+			}
+
+			&:hover {
+				svg {
+					path {
+						fill: $color-prussian-blue;
+					}
+				}
+			}
+
+			&:active {
+				svg {
+					path {
+						fill: $color-queen-blue;
+					}
+				}
+			}
+		}
+
+		.profile-preview {
+			order: -1;
+		}
+	}
+}

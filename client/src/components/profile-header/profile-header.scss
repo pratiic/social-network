@@ -1,0 +1,46 @@
+@import "../../scss/variables";
+
+.profile-header {
+	border: 1px solid $color-powder-blue;
+	padding: 0.5rem 0.7rem;
+	border-radius: 5px;
+	margin-bottom: 1.5rem;
+
+	.profile-picture {
+		margin-bottom: 0.3rem;
+	}
+
+	.username,
+	.email {
+		background-color: $color-powder-blue;
+		padding: 0.5rem;
+		border-radius: 5px;
+		width: fit-content;
+		// margin: auto;
+	}
+
+	.username {
+		margin-top: 2rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.email {
+		color: $color-queen-blue;
+		margin-bottom: 1.3rem;
+	}
+
+	.buttons {
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		flex-wrap: wrap;
+
+		& > *:not(:last-child) {
+			margin-right: 0.75rem;
+		}
+
+		& > * {
+			margin-bottom: 0.7rem;
+		}
+	}
+}

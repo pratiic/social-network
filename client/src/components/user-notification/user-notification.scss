@@ -1,0 +1,49 @@
+@import "../../scss/variables";
+
+.user-notification {
+	justify-content: space-between;
+	border-radius: 5px;
+	margin-bottom: 0.75rem;
+	padding: 0.5rem 0.75rem;
+	cursor: pointer;
+
+	&.seen {
+		background-color: $color-powder-blue;
+
+		.user-notification-text {
+			font-weight: 400;
+		}
+	}
+
+	&.not-seen {
+		background-color: darken($color-powder-blue, 15%);
+
+		&:last-of-type {
+			margin-bottom: 2rem;
+		}
+	}
+
+	&,
+	.notification-info {
+		display: flex;
+		align-items: center;
+	}
+
+	.notification-info {
+		justify-content: flex-start;
+		padding-right: 0.75rem;
+	}
+
+	.profile-picture {
+		margin-right: 0.75rem;
+	}
+
+	.user-notification-text {
+		font-weight: 500;
+		color: $color-prussian-blue;
+	}
+
+	.deleted-notification {
+		color: $color-prussian-blue;
+	}
+}

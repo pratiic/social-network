@@ -10,6 +10,7 @@ const { auth } = require("../middleware/auth");
 const Post = require("../models/Post");
 const Profile = require("../models/Profile");
 const gravatar = require("gravatar");
+const { getUpload } = require("../middleware/multer");
 
 const router = express.Router();
 
@@ -87,6 +88,8 @@ router.post("/login", async (request, response) => {
 		email: user.email,
 		password: user.password,
 		token,
+		profilePictureURL: user.profilePictureURL,
+		profilePicture: user.profilePicture,
 	});
 });
 
@@ -97,6 +100,111 @@ router.delete("/delete", auth, async (request, response) => {
 		await Post.deleteMany({ user: request.user });
 		await Profile.deleteMany({ user: request.user });
 		response.send({ message: "deleted" });
+	} catch (error) {
+		response.status(500).send(error);
+	}
+});
+
+//get a user
+router.get("/:userID", auth, async (request, response) => {
+	const user = await User.findById(request.params.userID);
+
+	if (!user) {
+		return response.status(400).send({ error: "user not found" });
+	}
+
+	response.send(user);
+});
+
+//get all users
+router.get("/", auth, async (request, response) => {
+	const users = await User.find({}).sort({ createdAt: -1 });
+
+	if (users.length === 0) {
+		return response.status(400).send({ error: "users not found" });
+	}
+
+	try {
+		response.send(users);
+	} catch (error) {
+		response.status(500).send(error);
+	}
+});
+
+//add a profile picture
+const upload = getUpload(1);
+
+router.post(
+	"/profile-picture",
+	auth,
+	upload.single("profilePicture"),
+	async (request, response) => {
+		const user = await User.findById(request.user);
+
+		if (!user) {
+			return response.status(400).send({ error: "user does not exist" });
+		}
+
+		try {
+			const updatedUser = await User.findByIdAndUpdate(request.user, {
+				profilePicture: request.file.buffer,
+			});
+			console.log(updatedUser);
+			response.send({ message: "profile picture added" });
+		} catch (error) {
+			response.status(500).send({ error: error.message });
+		}
+	},
+	(error, request, response, next) => {
+		response.send({ error: error.message });
+	}
+);
+
+//get profile picture
+router.get("/profile-picture/:userID", async (request, response) => {
+	const user = await User.findById(request.params.userID);
+
+	if (!user) {
+		return response.status(400).send({ error: "user not found" });
+	}
+
+	response.set("Content-Type", "image/jpg");
+
+	try {
+		response.send(user.profilePicture);
+	} catch (error) {
+		response.send(error);
+	}
+});
+
+//search for users
+router.get("/search/:searchValue", async (request, response) => {
+	const searchValue = request.params.searchValue;
+
+	const users = await User.find({
+		$or: [
+			// {
+			// 	username: {
+			// 		$regex: /searchValue/,
+			// 		$options: "i",
+			// 	},
+			// },
+			// { email: { $regex: /searchValue/, $options: "i" } },
+			{
+				username: searchValue,
+			},
+			{
+				email: searchValue,
+			},
+		],
+	});
+
+	if (users.length === 0) {
+		return response.status(400).send({ error: "users not found" });
+	}
+
+	try {
+		response.send(users);
 	} catch (error) {
 		response.status(500).send(error);
 	}

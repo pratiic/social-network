@@ -5,21 +5,39 @@
 	margin-bottom: 2.5rem;
 
 	label {
-		text-transform: capitalize;
 		margin-left: 0.5rem;
 		color: $color-queen-blue;
+		display: block;
+
+		&::first-letter {
+			text-transform: capitalize;
+		}
 	}
 
-	input {
+	input,
+	textarea {
 		outline: none;
 		width: 100%;
 		border: 2px solid $color-prussian-blue;
-		height: 3.5rem;
 		background-color: $color-powder-blue;
 		border-radius: 5px;
 		padding: 0 0.5rem;
 		font-family: inherit;
 		color: $color-prussian-blue;
+	}
+
+	input {
+		height: 3.5rem;
+	}
+
+	textarea {
+		resize: none;
+		height: 9rem;
+		padding: 0.5rem 0.5rem;
+
+		&.smaller {
+			height: 7rem;
+		}
 	}
 
 	.error {

@@ -1,0 +1,36 @@
+@import "../../scss/variables";
+
+.comments {
+	padding: 1rem;
+	position: relative;
+
+	.input-box {
+		margin-bottom: 1.5rem;
+	}
+
+	.info-message {
+		margin-top: 0rem;
+	}
+
+	.alert {
+		position: static;
+		transform: translateX(0);
+		margin-bottom: 0.75rem;
+		background-color: $color-queen-blue;
+	}
+
+	.comments-main {
+		max-height: 35rem;
+		overflow-x: hidden;
+		overflow-y: scroll;
+		padding-right: 0.45rem;
+
+		&::-webkit-scrollbar {
+			width: 0.3rem;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background-color: $color-queen-blue;
+		}
+	}
+}

@@ -9,19 +9,34 @@ const CustomInput = ({
 	type,
 	name,
 	inputChangeHandler,
+	renderAs,
+	size,
 }) => {
 	return (
 		<div className={`custom-input ${error ? "error" : null}`}>
 			<label className="text-small">{label}</label>
-			<input
-				type={type}
-				value={value}
-				name={name}
-				className="text-small"
-				onChange={(event) => {
-					inputChangeHandler(event);
-				}}
-			/>
+			{renderAs === "textarea" ? (
+				<textarea
+					value={value}
+					name={name}
+					className={`text-small ${
+						size === "smaller" ? "smaller" : null
+					}`}
+					onChange={(event) => {
+						inputChangeHandler(event);
+					}}
+				/>
+			) : (
+				<input
+					type={type}
+					value={value}
+					name={name}
+					className="text-small"
+					onChange={(event) => {
+						inputChangeHandler(event);
+					}}
+				/>
+			)}
 			<p className="error text-small">{error}</p>
 		</div>
 	);

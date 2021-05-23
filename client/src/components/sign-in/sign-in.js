@@ -1,12 +1,20 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+
+import { showNotification } from "../../redux/notification/notification.actions";
+
+import { CurrentUserContext } from "../../contexts/current-user.context";
 
 import { loginOrRegister } from "../../api/api.user";
-
+import { getProfile } from "../../api/api.profile";
 import { setFieldError, clearFieldErrors } from "../utils/utils.forms";
+
+import { ReactComponent as SignInIcon } from "../../assets/icons/sign-in.svg";
 
 import CustomInput from "../custom-input/custom-input";
 import Button from "../button/button";
+import FormHeader from "../form-header/form-header";
 
 class SignIn extends React.Component {
 	constructor() {
@@ -24,7 +32,20 @@ class SignIn extends React.Component {
 		this.clearFieldErrors = clearFieldErrors.bind(this);
 	}
 
+	static contextType = CurrentUserContext;
+
 	fieldNames = ["email", "password"];
+
+	componentDidMount() {
+		const [
+			currentUser,
+			setCurrentUser,
+			currentUserProfile,
+			setCurrentUserProfile,
+		] = this.context;
+		setCurrentUser(null);
+		setCurrentUserProfile(null);
+	}
 
 	handleInputChange = (event) => {
 		this.setState({ [event.target.name]: event.target.value });
@@ -41,8 +62,6 @@ class SignIn extends React.Component {
 			email: this.state.email,
 			password: this.state.password,
 		}).then((data) => {
-			console.log(data);
-
 			if (data.message === `"email" is not allowed to be empty`) {
 				this.setFieldError("email", "email cannot be empty");
 			} else if (
@@ -77,22 +96,46 @@ class SignIn extends React.Component {
 					"password",
 					"email or password is incorrect"
 				);
+			} else {
+				this.handleUserLogin(data);
 			}
 
 			this.setState({ signingIn: false });
 		});
 	};
 
+	handleUserLogin = (user) => {
+		console.log(user);
+
+		const [
+			currentUser,
+			setCurrentUser,
+			currentUserProfile,
+			setCurrentUserProfile,
+		] = this.context;
+
+		setCurrentUser(user);
+
+		getProfile(user._id, user.token).then((data) => {
+			if (data.error) {
+				this.props.history.push("/profile/add");
+			} else {
+				setCurrentUserProfile(data);
+				this.props.history.push("./posts");
+				this.props.showNotification(true, "you are signed in");
+			}
+		});
+	};
+
 	render() {
 		return (
 			<div className="sign-in form-container">
-				<div className="form-header">
-					<p className="title text-big">sign in to social network</p>
-					<p className="subtitle text-small">
-						Do not have an account?{" "}
-						<Link to="/register">register</Link>
-					</p>
-				</div>
+				<FormHeader
+					title="sign in to social network"
+					subtitle="Do not have an account?"
+					link="register"
+					linkTo="register"
+				/>
 				<form className="sign-in form" onSubmit={this.handleFormSubmit}>
 					<CustomInput
 						value={this.state.email}
@@ -111,6 +154,7 @@ class SignIn extends React.Component {
 						inputChangeHandler={this.handleInputChange}
 					/>
 					<Button type="submit" full>
+						<SignInIcon className="icon" />{" "}
 						{this.state.signingIn ? "signing in" : "sign in"}
 					</Button>
 				</form>
@@ -119,4 +163,12 @@ class SignIn extends React.Component {
 	}
 }
 
-export default SignIn;
+export const mapDispatchToProps = (dispatch) => {
+	return {
+		showNotification: (notificationType, notificationText) => {
+			dispatch(showNotification(notificationType, notificationText));
+		},
+	};
+};
+
+export default withRouter(connect(null, mapDispatchToProps)(SignIn));

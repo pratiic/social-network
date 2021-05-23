@@ -1,7 +1,29 @@
 .wrapper {
-	max-width: 1400px;
+	max-width: 1100px;
 	padding: 0 2.5rem;
 	margin: auto;
+
+	@media screen and (max-width: 500px) {
+		padding: 0 2rem;
+	}
+
+	@media screen and (max-width: 400px) {
+		padding: 0 1.5rem;
+	}
+}
+
+.wrapper-small {
+	max-width: 400px;
+	margin: auto;
+}
+
+.wrapper-medium {
+	max-width: 750px;
+	margin: auto;
+
+	@media screen and (max-width: 750px) {
+		width: 100%;
+	}
 }
 
 .form-container {
@@ -16,6 +38,10 @@
 			text-transform: uppercase;
 		}
 	}
+
+	@media screen and (max-width: 700px) {
+		padding-top: 1.7rem;
+	}
 }
 
 .form {
@@ -29,4 +55,106 @@
 	button {
 		padding: 0.55rem 1rem;
 	}
+
+	@media screen and (max-width: 350px) {
+		width: 27rem;
+	}
+}
+
+.icon {
+	height: 1.5rem;
+	width: 1.5rem;
+	cursor: pointer;
+
+	path {
+		fill: $color-queen-blue;
+	}
+
+	&.active {
+		path {
+			fill: $color-prussian-blue;
+		}
+	}
+
+	&.icon-bigger {
+		height: 1.7rem;
+		width: 1.7rem;
+	}
+
+	&.align-right {
+		display: block;
+		margin-left: auto;
+	}
+
+	&.white {
+		path {
+			fill: $color-light-cyan;
+		}
+
+		&:hover {
+			path {
+				fill: $color-light-cyan;
+			}
+		}
+
+		&:active {
+			path {
+				fill: $color-light-cyan;
+			}
+		}
+	}
+
+	&:hover {
+		path {
+			fill: $color-prussian-blue;
+		}
+	}
+
+	&:active {
+		path {
+			fill: $color-queen-blue;
+		}
+	}
+}
+
+.info-message {
+	color: $color-queen-blue;
+	text-align: center;
+
+	&::first-letter {
+		text-transform: capitalize;
+	}
+}
+
+.human {
+	height: 30rem;
+	display: block;
+	margin: auto;
+
+	@media screen and (max-width: 400px) {
+		width: 100%;
+	}
+}
+
+.logo {
+	font-size: 2.5rem;
+	text-transform: capitalize;
+	cursor: pointer;
+	color: $color-prussian-blue;
+
+	&-smaller {
+		font-size: 2rem;
+	}
+
+	@media screen and (max-width: 400px) {
+		font-size: 2.35rem;
+	}
+}
+
+.count {
+	background-color: $color-prussian-blue;
+	color: $color-light-cyan;
+	padding: 0.1rem 0.35rem;
+	border-radius: 5px;
+	font-size: 1.2rem;
 }

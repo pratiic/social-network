@@ -1,0 +1,15 @@
+@import "../../scss/variables";
+
+.page-title {
+	text-align: center;
+	margin-top: 1rem;
+	margin-bottom: 1.75rem;
+
+	@media screen and (max-width: 500px) {
+		margin-bottom: 1.5rem;
+	}
+
+	.title {
+		color: $color-prussian-blue;
+	}
+}

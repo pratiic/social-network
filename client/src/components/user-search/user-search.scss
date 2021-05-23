@@ -1,0 +1,32 @@
+@import "../../scss/variables";
+
+.user-search {
+	.input-group {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		border: 1px solid $color-queen-blue;
+		border-radius: 5px;
+		height: 3rem;
+		padding: 0 0.3rem;
+		font-weight: inherit;
+
+		::-webkit-input-placeholder {
+			color: $color-queen-blue;
+		}
+
+		svg {
+			margin-right: 0.5rem;
+			height: 2rem;
+			width: 2rem;
+		}
+
+		input {
+			width: 100%;
+			outline: none;
+			border: none;
+			color: $color-prussian-blue;
+		}
+	}
+}

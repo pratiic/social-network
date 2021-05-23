@@ -1,0 +1,53 @@
+@import "../../scss/variables";
+
+.profile-picture-adder {
+	width: fit-content;
+	margin: auto;
+
+	.title {
+		width: 100%;
+		text-align: center;
+	}
+
+	.existing-image {
+		&::first-letter {
+			text-transform: uppercase;
+		}
+		margin-bottom: 0.75rem;
+		color: $color-prussian-blue;
+		margin-left: 0.5rem;
+	}
+
+	.error {
+		color: $color-red;
+		margin-top: 0.75rem;
+		margin-bottom: 4rem;
+
+		&::first-letter {
+			text-transform: capitalize;
+		}
+	}
+
+	.profile-picture {
+		margin-left: 0;
+		margin-right: auto;
+	}
+
+	.buttons {
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+
+		& > *:first-child {
+			margin-right: 0.75rem;
+		}
+	}
+
+	.file-selector {
+		margin-top: 0.75rem;
+
+		button {
+			width: 15rem;
+		}
+	}
+}

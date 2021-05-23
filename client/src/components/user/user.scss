@@ -1,0 +1,50 @@
+@import "../../scss/variables";
+
+.user {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	background-color: $color-powder-blue;
+	border-radius: 5px;
+	margin-bottom: 1.5rem;
+	padding: 0.4rem 1rem;
+	cursor: pointer;
+	position: relative;
+
+	&:hover {
+		background-color: $color-powder-blue-darker;
+	}
+
+	&:active {
+		background-color: $color-powder-blue;
+	}
+
+	&.active {
+		background-color: $color-powder-blue-darker;
+	}
+
+	.user-info {
+		margin-left: 1rem;
+		flex: 1 1 auto;
+	}
+
+	.username {
+		color: $color-prussian-blue;
+	}
+
+	.email {
+		color: $color-queen-blue;
+	}
+
+	.count {
+		color: $color-light-cyan;
+		position: absolute;
+		right: 1rem;
+		top: 50%;
+		transform: translateY(-50%);
+		font-weight: 500;
+		background-color: $color-prussian-blue;
+		border-radius: 5px;
+		padding: 0.2rem 0.25rem;
+	}
+}

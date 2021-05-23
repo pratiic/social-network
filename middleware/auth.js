@@ -5,7 +5,7 @@ const auth = (request, response, next) => {
 
 	if (!token) {
 		return response.status(401).send({
-			message: "you are not authorized to carry out this action",
+			message: "you have not provided token",
 		});
 	}
 

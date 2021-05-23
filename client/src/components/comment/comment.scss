@@ -1,0 +1,36 @@
+@import "../../scss/variables";
+
+.comment {
+	background-color: $color-powder-blue;
+	margin-bottom: 1.2rem;
+	border-radius: 5px;
+
+	& > * {
+		padding: 0.3rem 0.75rem;
+	}
+
+	.comment-header {
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		border-bottom: 1px solid $color-light-cyan;
+
+		.profile-picture {
+			margin-right: 1rem;
+		}
+	}
+
+	.comment-description {
+		padding: 0.5rem 0.75rem 1rem 0.75rem;
+	}
+
+	.comment-footer {
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+
+		& > *:not(:last-child) {
+			margin-right: 4rem;
+		}
+	}
+}

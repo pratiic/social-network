@@ -1,0 +1,26 @@
+@import "../../scss/variables";
+
+.alert {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: $color-queen-blue;
+	color: $color-light-cyan;
+	padding: 0.3rem 1.5rem;
+	text-align: center;
+	margin-bottom: 0.7rem;
+
+	.alert-description {
+		&::first-letter {
+			text-transform: capitalize;
+		}
+
+		margin-right: 3rem;
+	}
+
+	svg {
+		path {
+			fill: $color-light-cyan;
+		}
+	}
+}

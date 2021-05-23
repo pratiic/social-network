@@ -10,6 +10,10 @@ const userSchema = new mongoose.Schema(
 			ref: "Profile",
 		},
 		profilePictureURL: String,
+		profilePicture: {
+			type: Boolean,
+			default: false,
+		},
 	},
 	{ timestamps: true }
 );

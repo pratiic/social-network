@@ -1,0 +1,3 @@
+export const profileActionTypes = {
+	SET_CURRENTLY_VIEWED_PROFILE: "SET_CURRENTLY_VIEWED_PROFILE",
+};

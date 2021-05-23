@@ -1,7 +1,8 @@
-$color-red: #d64045;
+$color-red: #f55c47;
 $color-light-cyan: #e9fff9;
 $color-powder-blue: #9ed8db;
 $color-queen-blue: #467599;
 $color-prussian-blue: #1d3354;
+$color-powder-blue-darker: darken($color-powder-blue, 15%);
 
 $font-stack-primary: "Roboto", sans-serif;

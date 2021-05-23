@@ -1,19 +1,52 @@
 @import "../../scss/variables";
 
 button {
-	background-color: $color-red;
+	background-color: $color-queen-blue;
 	outline: none;
 	border: none;
-	padding: 0.2rem 1.2rem;
+	padding: 0.5rem 0.75rem;
 	color: $color-light-cyan;
-	font-size: 1.55rem;
+	font-size: 1.5rem;
 	text-transform: capitalize;
 	font-family: inherit;
 	border-radius: 5px;
 	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	svg.icon {
+		margin-right: 0.5rem;
+
+		path {
+			fill: $color-light-cyan;
+		}
+
+		&:hover {
+			path {
+				fill: $color-light-cyan;
+			}
+		}
+
+		&:active {
+			path {
+				fill: $color-light-cyan;
+			}
+		}
+	}
+
+	&:hover {
+		background-color: darken($color-queen-blue, 10%);
+
+		svg {
+			path {
+				fill: $color-light-cyan;
+			}
+		}
+	}
 
 	&:active {
-		background-color: darken($color-red, 15%);
+		background-color: darken($color-queen-blue, 15%);
 	}
 
 	&.full {
@@ -21,27 +54,89 @@ button {
 	}
 
 	&.outlined {
-		border: 1px solid $color-red;
+		border: 1px solid $color-queen-blue;
 		background-color: transparent;
-		color: $color-red;
+		color: $color-queen-blue;
 
 		&:hover {
-			background-color: $color-red;
+			background-color: $color-queen-blue;
 			color: $color-light-cyan;
 		}
 
 		&:active {
-			background-color: darken($color-red, 15%);
+			background-color: darken($color-queen-blue, 15%);
 		}
 	}
 
-	&.white {
-		border: 1px solid $color-light-cyan;
-		color: white;
+	&.secondary {
+		background-color: $color-powder-blue;
+		color: $color-queen-blue;
+		padding: 0.5rem 0.75rem;
+
+		svg {
+			path {
+				fill: $color-queen-blue;
+			}
+		}
+
+		&.active {
+			background-color: $color-powder-blue-darker;
+			color: $color-prussian-blue;
+
+			svg {
+				path {
+					fill: $color-prussian-blue;
+				}
+			}
+		}
+
+		&.smaller {
+			padding: 0.35rem 0.75rem;
+		}
+
+		&:hover {
+			background-color: $color-powder-blue-darker;
+			color: $color-prussian-blue;
+
+			svg {
+				path {
+					fill: $color-prussian-blue;
+				}
+			}
+		}
 
 		&:active {
-			color: $color-powder-blue;
-			border: 1px solid $color-powder-blue;
+			background-color: darken($color-powder-blue, 20%);
 		}
+	}
+
+	&.red {
+		background-color: $color-red;
+		color: $color-light-cyan;
+
+		&:hover {
+			background-color: darken($color-red, 25%);
+			color: $color-light-cyan;
+		}
+
+		&:active {
+			background-color: $color-red;
+		}
+	}
+
+	&.bigger {
+		padding: 0.2rem 1.5rem;
+	}
+
+	&.smaller {
+		padding: 0.35rem 0.75rem;
+	}
+
+	&.center {
+		margin: auto;
+	}
+
+	&.right {
+		margin-left: auto;
 	}
 }

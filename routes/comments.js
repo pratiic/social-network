@@ -2,6 +2,8 @@ const express = require("express");
 const Comment = require("../models/Comment");
 const { validateComment } = require("../validation/comment-validation");
 const { auth } = require("../middleware/auth");
+const Notification = require("../models/Notification");
+const Post = require("../models/Post");
 
 const router = express.Router();
 
@@ -23,7 +25,30 @@ router.post("/:postID", auth, async (request, response) => {
 		post: request.params.postID,
 	});
 
+	const post = await Post.findById(request.params.postID);
+
+	if (!post) {
+		return response.status(400).send({ error: "post not found" });
+	}
+
 	try {
+		const notification = new Notification({
+			from: request.user,
+			to: post.user,
+			action: "comment",
+			postID: request.params.postID,
+			type: "post",
+		});
+
+		if (post.user != request.user) {
+			const [savedComment, savedNotifcation] = await Promise.all([
+				comment.save(),
+				notification.save(),
+			]);
+
+			return response.status(201).send(savedComment);
+		}
+
 		const savedComment = await comment.save();
 		response.status(201).send(savedComment);
 	} catch (error) {
@@ -35,10 +60,12 @@ router.post("/:postID", auth, async (request, response) => {
 router.get("/:postID", auth, async (request, response) => {
 	const comments = await Comment.find({
 		post: request.params.postID,
-	}).populate("user");
+	})
+		.sort({ createdAt: -1 })
+		.populate("user");
 
 	if (comments.length === 0) {
-		return response.status(400).send({ message: "no comments found" });
+		return response.status(400).send({ error: "no comments found" });
 	}
 
 	return response.send(comments);
@@ -72,12 +99,17 @@ router.delete("/:commentID", auth, async (request, response) => {
 		user: request.user,
 	});
 
+	console.log(comment);
+
 	if (!comment) {
 		return response.status(400).send({ message: "comment doesnot exist" });
 	}
 
 	try {
-		await Comment.findByIdAndDelete(request.params.id);
+		await Comment.findOneAndDelete({
+			_id: request.params.commentID,
+			user: request.user,
+		});
 		response.send({ message: "deleted" });
 	} catch (error) {
 		response.status(500).send(error);
@@ -200,7 +232,20 @@ router.put("/:commentID/likes", auth, async (request, response) => {
 	}
 
 	try {
+		const notification = new Notification({
+			from: request.user,
+			to: comment.user,
+			action: "like",
+			postID: comment.post,
+			type: "comment",
+		});
+
+		if (request.user != comment.user) {
+			return await Promise.all([comment.save(), notification.save()]);
+		}
+
 		await comment.save();
+
 		response.send({ message: "liked" });
 	} catch (error) {
 		response.status(500).send(error);
@@ -234,7 +279,20 @@ router.put("/:commentID/dislikes", auth, async (request, response) => {
 	}
 
 	try {
+		const notification = new Notification({
+			from: request.user,
+			to: comment.user,
+			action: "dislike",
+			postID: comment.post,
+			type: "comment",
+		});
+
+		if (request.user != comment.user) {
+			return await Promise.all([comment.save(), notification.save()]);
+		}
+
 		await comment.save();
+
 		response.send({ message: "disliked" });
 	} catch (error) {
 		response.status(500).send(error);

@@ -1,0 +1,22 @@
+@import "../../scss/variables";
+
+.posts {
+	margin-top: 1.5rem;
+
+	.info-message {
+		margin-top: 3.5rem;
+	}
+
+	.icon-bigger {
+		box-sizing: content-box;
+		padding: 0.5rem;
+	}
+
+	.alert {
+		position: fixed;
+		left: 50%;
+		transform: translateX(-50%);
+		top: 0rem;
+		z-index: 1;
+	}
+}

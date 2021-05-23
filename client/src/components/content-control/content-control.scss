@@ -1,0 +1,28 @@
+@import "../../scss/variables";
+
+.content-control {
+	cursor: pointer;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	p {
+		margin-left: 0.35rem;
+	}
+
+	&:hover {
+		svg {
+			path {
+				fill: $color-prussian-blue;
+			}
+		}
+	}
+
+	&:active {
+		svg {
+			path {
+				fill: $color-queen-blue;
+			}
+		}
+	}
+}

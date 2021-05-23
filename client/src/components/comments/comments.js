@@ -1,0 +1,149 @@
+import React, { useState, useContext, useEffect } from "react";
+import io from "socket.io-client";
+import { connect, useDispatch } from "react-redux";
+
+import "./comments.scss";
+
+import {
+	addComment as addCommentToReduxStore,
+	addComments,
+	deleteComment,
+	updateComment,
+} from "../../redux/posts/posts.actions";
+import { showNotification } from "../../redux/notification/notification.actions";
+
+import { CurrentUserContext } from "../../contexts/current-user.context";
+
+import { getComments, addComment } from "../../api/api.comments";
+
+import { ReactComponent as ReloadIcon } from "../../assets/icons/reload.svg";
+
+import InputBox from "../input-box/input-box";
+import Comment from "../comment/comment";
+import Alert from "../alert/alert";
+import Reload from "../reload/reload";
+
+const Comments = ({ postID, comments }) => {
+	const [commentsMessage, setCommentsMessage] = useState("");
+	const [showAlert, setShowAlert] = useState(false);
+	const [showReload, setShowReload] = useState(false);
+
+	const [currentUser, setCurrentUser] = useContext(CurrentUserContext);
+
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		fetchComments();
+	}, []);
+
+	useEffect(() => {
+		const socket = io("http://localhost:5000");
+
+		socket.on("commentAdded", (data) => {
+			console.log(data);
+			if (data.post == postID && data.user != currentUser._id) {
+				setShowAlert(true);
+				setShowReload(true);
+			}
+		});
+
+		socket.on("commentLikedOrDisliked", (data) => {
+			console.log(data);
+			dispatch(updateComment(postID, data));
+		});
+
+		socket.on("commentDeleted", (data) => {
+			dispatch(deleteComment(postID, data._id));
+			dispatch(showNotification(true, "comment has been deleted"));
+		});
+	}, []);
+
+	const fetchComments = () => {
+		setShowAlert(false);
+		setShowReload(false);
+		setCommentsMessage("loading...");
+
+		getComments(postID, currentUser.token).then((data) => {
+			if (data.error === "no comments found") {
+				setCommentsMessage("no comments");
+			} else {
+				dispatch(addComments(data, postID));
+
+				setCommentsMessage("");
+			}
+		});
+	};
+
+	// useEffect(() => {
+	// 	if (comments.length > 0) {
+	// 		setComments(
+	// 			comments.map((comment) => {
+	// 				if (comment._id == commentUpdatedData._id) {
+	// 					return { ...comment, ...commentUpdatedData };
+	// 				}
+
+	// 				return comment;
+	// 			})
+	// 		);
+	// 	}
+	// }, [commentUpdatedData]);
+
+	const handleCommentSubmit = (event, value) => {
+		event.preventDefault();
+
+		addComment(postID, { description: value }, currentUser.token).then(
+			(data) => {
+				if (!data.error) {
+					dispatch(
+						addCommentToReduxStore(
+							{ ...data, user: currentUser },
+							postID
+						)
+					);
+				}
+			}
+		);
+	};
+
+	const hideAlert = () => {
+		setShowAlert(false);
+	};
+
+	return (
+		<div className="comments">
+			<InputBox
+				placeholder="write a comment..."
+				formSubmitHandler={handleCommentSubmit}
+			/>
+
+			{showAlert ? (
+				<Alert text="new comments available" clickHandler={hideAlert} />
+			) : null}
+
+			{showReload ? (
+				<Reload text="new comments" clickHandler={fetchComments} />
+			) : null}
+
+			<div className="comments-main">
+				{comments.length > 0 ? (
+					comments.map((comment) => {
+						return <Comment {...comment} key={comment._id} />;
+					})
+				) : (
+					<p className="info-message text-smaller">
+						{commentsMessage}
+					</p>
+				)}
+			</div>
+		</div>
+	);
+};
+
+const mapStateToProps = (state, props) => {
+	return {
+		comments: state.posts.posts.find((post) => post._id == props.postID)
+			.comments,
+	};
+};
+
+export default connect(mapStateToProps)(Comments);
