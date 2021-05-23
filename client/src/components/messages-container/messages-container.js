@@ -30,7 +30,7 @@ const MessagesContainer = ({
 	const bottomDivRef = useRef();
 
 	useEffect(() => {
-		const socket = io("/");
+		const socket = io("http://socialnetworkawesome.herokuapp.com/");
 
 		socket.on(
 			"messageAdded",

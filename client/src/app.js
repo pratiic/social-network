@@ -52,7 +52,7 @@ const App = ({ currentChatUser }) => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		const socket = io("/");
+		const socket = io("http://socialnetworkawesome.herokuapp.com/");
 
 		socket.on("profileUpdated", (data) => {
 			if (currentUserProfile) {
@@ -66,7 +66,7 @@ const App = ({ currentChatUser }) => {
 	}, [currentUserProfile]);
 
 	useEffect(() => {
-		const socket = io("/");
+		const socket = io("http://socialnetworkawesome.herokuapp.com/");
 
 		socket.on("chatAdded", (data) => {
 			console.log(currentUser);
@@ -96,7 +96,7 @@ const App = ({ currentChatUser }) => {
 	}, [currentUser]);
 
 	useEffect(() => {
-		const socket = io("/");
+		const socket = io("http://socialnetworkawesome.herokuapp.com/");
 
 		socket.on("messageAdded", (data) => {
 			if (currentUser) {

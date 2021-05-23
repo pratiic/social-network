@@ -51,7 +51,7 @@ const Posts = ({ posts, newNotifications }) => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		const socket = io("/");
+		const socket = io("http://socialnetworkawesome.herokuapp.com/");
 
 		socket.on("postLikedOrDisliked", (data) => {
 			dispatch(updatePost(data));
@@ -78,7 +78,7 @@ const Posts = ({ posts, newNotifications }) => {
 	}, []);
 
 	useEffect(() => {
-		const socket = io("/");
+		const socket = io("http://socialnetworkawesome.herokuapp.com/");
 
 		socket.on("notificationAdded", (notification) => {
 			if (notification.to == currentUser._id) {
