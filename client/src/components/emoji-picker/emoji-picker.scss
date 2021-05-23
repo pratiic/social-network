@@ -9,4 +9,10 @@
 	&.show {
 		display: block;
 	}
+
+	@media screen and (max-width: 450px) {
+		width: 100%;
+		height: 35rem;
+		top: -35.5rem;
+	}
 }

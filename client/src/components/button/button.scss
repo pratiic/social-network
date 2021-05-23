@@ -58,9 +58,21 @@ button {
 		background-color: transparent;
 		color: $color-queen-blue;
 
+		svg {
+			path {
+				fill: $color-queen-blue;
+			}
+		}
+
 		&:hover {
 			background-color: $color-queen-blue;
 			color: $color-light-cyan;
+
+			svg {
+				path {
+					fill: $color-light-cyan;
+				}
+			}
 		}
 
 		&:active {

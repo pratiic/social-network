@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import "./welcome.scss";
 
 import { ReactComponent as WelcomePageHuman } from "../../assets/humans/welcome-page.svg";
+import { ReactComponent as ChevronRightIcon } from "../../assets/icons/chevron-right.svg";
 
 import Button from "../button/button";
 
@@ -21,7 +22,7 @@ const Welcome = () => {
 				</p>
 			</div>
 			<div className="welcome-body">
-				<WelcomePageHuman />
+				<WelcomePageHuman className="human" />
 				<div className="create-account">
 					<p className="text-small uppercase">
 						create an account here
@@ -32,6 +33,7 @@ const Welcome = () => {
 							history.push("/register");
 						}}
 					>
+						<ChevronRightIcon className="icon" />
 						register
 					</Button>
 				</div>

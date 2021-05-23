@@ -26,8 +26,11 @@ const InputBox = ({ placeholder, formSubmitHandler, changeHandler }) => {
 	};
 
 	const handleFormSubmit = (event) => {
+		event.preventDefault();
 		formSubmitHandler(event, input);
 		setInput("");
+		setShowEmoji(false);
+		inputRef.current.focus();
 	};
 
 	const insertEmoji = (emoji) => {
