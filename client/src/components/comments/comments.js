@@ -37,7 +37,7 @@ const Comments = ({ postID, comments }) => {
 	}, []);
 
 	useEffect(() => {
-		const socket = io("http://socialnetworkawesome.herokuapp.com/");
+		const socket = io("https://socialnetworkawesome.herokuapp.com/");
 
 		socket.on("commentAdded", (data) => {
 			console.log(data);
