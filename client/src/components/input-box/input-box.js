@@ -72,7 +72,9 @@ const InputBox = ({ placeholder, formSubmitHandler, changeHandler }) => {
 							onClick={handleEmojiIconClick}
 						/>
 					) : null}
-					<SendIcon className="icon" onClick={handleFormSubmit} />
+					<button type="submit">
+						<SendIcon className="icon" onClick={handleFormSubmit} />
+					</button>
 				</div>
 			</div>
 		</form>

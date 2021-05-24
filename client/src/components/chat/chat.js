@@ -136,7 +136,7 @@ const Chat = ({ messages, chatID, currentChatUser }) => {
 				messages={messages}
 				messagesMessage={messagesMessage}
 			/>
-			{friends ? (
+			{/* {friends ? (
 				<InputBox
 					placeholder="write a message..."
 					formSubmitHandler={handleFormSubmit}
@@ -146,7 +146,12 @@ const Chat = ({ messages, chatID, currentChatUser }) => {
 				<div className="user-not-available text-smaller">
 					you cannot chat with this user anymore
 				</div>
-			)}
+			)} */}
+			<InputBox
+				placeholder="write a message..."
+				formSubmitHandler={handleFormSubmit}
+				changeHandler={handleInputChange}
+			/>
 		</div>
 	);
 };

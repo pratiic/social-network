@@ -22,6 +22,10 @@ body {
 	&::-webkit-scrollbar-thumb {
 		background-color: $color-powder-blue;
 	}
+
+	& > * {
+		-webkit-tap-highlight-color: transparent;
+	}
 }
 
 li {

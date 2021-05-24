@@ -83,14 +83,10 @@
 			margin-left: 0;
 			width: 100%;
 			border-bottom: 1px solid $color-powder-blue-darker;
-			padding: 0.7rem 7rem;
-
-			@media screen and (max-width: 500px) {
-				padding: 0.7rem 5rem;
-			}
+			padding: 1.5rem 7rem;
 
 			@media screen and (max-width: 350px) {
-				padding: 0.7rem 4rem;
+				padding: 0.7rem 5rem;
 			}
 		}
 
@@ -100,10 +96,12 @@
 
 		.nav-link {
 			justify-content: flex-start;
-			font-size: 1.55rem;
+			font-size: 1.7rem;
 			text-transform: lowercase;
 
 			svg {
+				height: 1.75rem;
+				width: 1.75rem;
 				display: block;
 				margin-right: 0.75rem;
 			}

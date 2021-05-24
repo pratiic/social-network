@@ -3,7 +3,7 @@ Joi.objectId = require("joi-objectid")(Joi);
 const { checkForErrors } = require("./validation.utils");
 
 const commentSchema = Joi.object({
-	description: Joi.string().min(9).required(),
+	description: Joi.string().required(),
 	user: Joi.objectId().required(),
 	post: Joi.objectId().required(),
 });

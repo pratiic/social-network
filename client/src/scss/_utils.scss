@@ -62,8 +62,8 @@
 }
 
 .icon {
-	height: 1.5rem;
-	width: 1.5rem;
+	height: 1.55rem;
+	width: 1.55rem;
 	cursor: pointer;
 
 	path {
@@ -167,4 +167,12 @@ textarea {
 	&::-webkit-scrollbar-thumb {
 		background-color: $color-queen-blue;
 	}
+}
+
+button {
+	border: none;
+	outline: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
