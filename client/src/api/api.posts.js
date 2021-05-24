@@ -46,6 +46,7 @@ export const editOrDeletePost = async (type, postID, editedPost, token) => {
 	const result = await fetch(`${baseURL}/posts/${postID}`, {
 		method: method,
 		headers: {
+			"Content-Type": "application/json",
 			"auth-token": token,
 		},
 		body: type === "edit" ? JSON.stringify(editedPost) : null,

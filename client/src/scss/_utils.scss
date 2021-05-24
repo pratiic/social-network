@@ -62,8 +62,8 @@
 }
 
 .icon {
-	height: 1.7rem;
-	width: 1.7rem;
+	height: 1.55rem;
+	width: 1.55rem;
 	cursor: pointer;
 
 	path {
@@ -114,6 +114,11 @@
 		path {
 			fill: $color-queen-blue;
 		}
+	}
+
+	@media screen and (max-width: 500px) {
+		height: 1.7rem;
+		width: 1.7rem;
 	}
 }
 

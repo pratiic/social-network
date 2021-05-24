@@ -4,11 +4,13 @@ import "./alert.scss";
 
 import { ReactComponent as ClearIcon } from "../../assets/icons/clear.svg";
 
-const Alert = ({ text, clickHandler }) => {
+const Alert = ({ text, clickHandler, position, type }) => {
 	return (
-		<div className={`alert text-small`}>
+		<div className={`alert text-small ${position}`}>
 			<p className="alert-description">{text}</p>
-			<ClearIcon className="icon" onClick={clickHandler} />
+			{type !== "no-remove" ? (
+				<ClearIcon className="icon" onClick={clickHandler} />
+			) : null}
 		</div>
 	);
 };

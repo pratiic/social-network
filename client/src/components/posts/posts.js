@@ -147,7 +147,11 @@ const Posts = ({ posts, newNotifications }) => {
 		<div className="posts">
 			<PostCreator />
 			{showAlert ? (
-				<Alert text="new posts available" clickHandler={hideAlert} />
+				<Alert
+					text="new posts available"
+					clickHandler={hideAlert}
+					position="fixed"
+				/>
 			) : null}
 			{showReload ? (
 				<Reload text="new posts" clickHandler={fetchPosts} />

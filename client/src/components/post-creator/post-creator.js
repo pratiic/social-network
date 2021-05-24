@@ -1,23 +1,28 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 
 import "./post-creator.scss";
 
-import { addPost, addPosts } from "../../redux/posts/posts.actions";
+import {
+	addPost,
+	addPosts,
+	resetEditingFields,
+} from "../../redux/posts/posts.actions";
 import { showNotification } from "../../redux/notification/notification.actions";
 
 import { CurrentUserContext } from "../../contexts/current-user.context";
 import { PostsContext } from "../../contexts/posts.context";
 
-import { createPost } from "../../api/api.posts";
+import { createPost, editOrDeletePost } from "../../api/api.posts";
 
 import { ReactComponent as SendIcon } from "../../assets/icons/send.svg";
 
 import Button from "../button/button";
 import TextPostCreator from "../text-post-creator/text-post-creator";
 import ImagePostCreator from "../image-post-creator/image-post-creator";
+import Alert from "../alert/alert";
 
-const PostCreator = ({ posts }) => {
+const PostCreator = ({ posts, postTypeRedux, editingPost, postID }) => {
 	const [posting, setPosting] = useState(false);
 	const [postType, setPostType] = useState("image");
 	const [posted, setPosted] = useState(false);
@@ -27,11 +32,38 @@ const PostCreator = ({ posts }) => {
 
 	const dispatch = useDispatch();
 
+	useEffect(() => {
+		if (postTypeRedux) {
+			setPostType(postTypeRedux);
+		}
+	}, [postTypeRedux]);
+
 	const createTextPost = (post) => {
 		if (post.length !== 0) {
 			console.log(currentUser);
 			setPosting(true);
 			setPosted(false);
+
+			console.log(editingPost, postType);
+
+			if (editingPost && postType === "text") {
+				return editOrDeletePost(
+					"edit",
+					postID,
+					{ description: post },
+					currentUser.token
+				).then((data) => {
+					setPosting(false);
+
+					if (data.message === "updated") {
+						setPosted(true);
+						dispatch(
+							showNotification(true, "post has been edited")
+						);
+						dispatch(resetEditingFields());
+					}
+				});
+			}
 
 			createPost("text", { description: post }, currentUser.token).then(
 				(data) => {
@@ -51,6 +83,29 @@ const PostCreator = ({ posts }) => {
 	};
 
 	const createImagePost = (post) => {
+		setPosting(true);
+
+		setPosted(false);
+
+		clearError();
+
+		if (editingPost && postType === "image") {
+			return editOrDeletePost(
+				"edit",
+				postID,
+				{ description: post.description },
+				currentUser.token
+			).then((data) => {
+				setPosting(false);
+
+				if (data.message === "updated") {
+					setPosted(true);
+					dispatch(showNotification(true, "post has been edited"));
+					dispatch(resetEditingFields());
+				}
+			});
+		}
+
 		if (!post.file) {
 			return setError("you haven't selected an image");
 		}
@@ -58,12 +113,6 @@ const PostCreator = ({ posts }) => {
 		const formData = new FormData();
 		formData.append("postImage", post.file);
 		formData.append("description", post.description);
-
-		setPosting(true);
-
-		setPosted(false);
-
-		clearError();
 
 		createPost("image", formData, currentUser.token).then((data) => {
 			setPosting(false);
@@ -119,6 +168,9 @@ const PostCreator = ({ posts }) => {
 					text post
 				</div>
 			</div>
+			{editingPost ? (
+				<Alert text="edit mode on" type="no-remove" />
+			) : null}
 			{postType === "image" ? (
 				<ImagePostCreator
 					submitHandler={createImagePost}
@@ -141,6 +193,9 @@ const PostCreator = ({ posts }) => {
 const mapStateToProps = (state) => {
 	return {
 		posts: state.posts.posts,
+		postTypeRedux: state.posts.postType,
+		editingPost: state.posts.editingPost,
+		postID: state.posts.postID,
 	};
 };
 

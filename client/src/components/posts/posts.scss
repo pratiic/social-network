@@ -11,12 +11,4 @@
 		box-sizing: content-box;
 		padding: 0.5rem;
 	}
-
-	.alert {
-		position: fixed;
-		left: 50%;
-		transform: translateX(-50%);
-		top: 0rem;
-		z-index: 4;
-	}
 }

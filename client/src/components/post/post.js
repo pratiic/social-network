@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, memo } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import "./post.scss";
@@ -23,6 +23,7 @@ import { ReactComponent as ImageIcon } from "../../assets/icons/image.svg";
 import ProfilePicture from "../profile-picture/profile-picture";
 import ContentControl from "../content-control/content-control";
 import Comments from "../comments/comments";
+import { setEditingFields } from "../../redux/posts/posts.actions";
 
 const Post = ({
 	description,
@@ -32,6 +33,7 @@ const Post = ({
 	likedBy,
 	dislikedBy,
 	image,
+	comments,
 }) => {
 	const [showComments, setShowComments] = useState(true);
 
@@ -86,6 +88,10 @@ const Post = ({
 		} else {
 			history.push(`/profile/view/${user._id}`);
 		}
+	};
+
+	const handleEditButtonClick = () => {
+		dispatch(setEditingFields(description, _id, image ? "image" : "text"));
 	};
 
 	return (
@@ -146,14 +152,19 @@ const Post = ({
 							}`}
 						/>
 					</ContentControl>
-					<ContentControl clickHandler={handleCommentButtonClick}>
+					<ContentControl
+						count={comments.length}
+						clickHandler={handleCommentButtonClick}
+					>
 						<CommentIcon
 							className={`icon ${showComments ? "active" : null}`}
 						/>
 					</ContentControl>
 					{currentUser._id === user._id ? (
 						<React.Fragment>
-							<ContentControl>
+							<ContentControl
+								clickHandler={handleEditButtonClick}
+							>
 								<EditIcon className="icon" />
 							</ContentControl>
 							<ContentControl
@@ -173,4 +184,11 @@ const Post = ({
 	);
 };
 
-export default memo(Post);
+const mapStateToProps = (state, props) => {
+	return {
+		comments: state.posts.posts.find((post) => post._id == props._id)
+			.comments,
+	};
+};
+
+export default connect(mapStateToProps)(Post);

@@ -55,3 +55,20 @@ export const deleteComment = (postID, commentID) => {
 		payload: { post: postID, comment: commentID },
 	};
 };
+
+export const setEditingFields = (postDescription, postID, postType) => {
+	return {
+		type: "SET_EDITING_FIELDS",
+		payload: {
+			postDescription: postDescription,
+			postID: postID,
+			postType: postType,
+		},
+	};
+};
+
+export const resetEditingFields = () => {
+	return {
+		type: "RESET_EDITING_FIELDS",
+	};
+};

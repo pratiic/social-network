@@ -3,6 +3,11 @@ import { postsActionTypes } from "./posts.types";
 
 const INITIAL_STATE = {
 	posts: [],
+	editingPost: false,
+	postDescription: "",
+	postID: "",
+	postType: "",
+	postCreationType: "",
 };
 
 export const postsReducer = (state = INITIAL_STATE, action) => {
@@ -86,6 +91,22 @@ export const postsReducer = (state = INITIAL_STATE, action) => {
 					}
 					return post;
 				}),
+			};
+		case "SET_EDITING_FIELDS":
+			return {
+				...state,
+				editingPost: true,
+				postDescription: action.payload.postDescription,
+				postID: action.payload.postID,
+				postType: action.payload.postType,
+			};
+		case "RESET_EDITING_FIELDS":
+			return {
+				...state,
+				editingPost: false,
+				postDescription: "",
+				postID: "",
+				postType: "",
 			};
 		default:
 			return state;

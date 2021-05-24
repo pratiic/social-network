@@ -51,9 +51,9 @@ const Comment = ({ user, description, likedBy, dislikedBy, _id }) => {
 					id={user._id}
 					size="smaller"
 				/>
-				<p className="username text-smaller">{user.username}</p>
+				<p className="username text-small">{user.username}</p>
 			</div>
-			<p className="comment-description text-smaller">{description}</p>
+			<p className="comment-description text-small">{description}</p>
 			<div className="comment-footer">
 				<ContentControl
 					count={likedBy.length}
@@ -81,9 +81,6 @@ const Comment = ({ user, description, likedBy, dislikedBy, _id }) => {
 				</ContentControl>
 				{user._id == currentUser._id ? (
 					<React.Fragment>
-						<ContentControl>
-							<EditIcon className="icon" />
-						</ContentControl>
 						<ContentControl clickHandler={handleDeleteButtonClick}>
 							<TrashCanIcon className="icon" />
 						</ContentControl>
