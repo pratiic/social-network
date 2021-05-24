@@ -91,18 +91,20 @@ const Comments = ({ postID, comments }) => {
 	const handleCommentSubmit = (event, value) => {
 		event.preventDefault();
 
-		addComment(postID, { description: value }, currentUser.token).then(
-			(data) => {
-				if (!data.error) {
-					dispatch(
-						addCommentToReduxStore(
-							{ ...data, user: currentUser },
-							postID
-						)
-					);
+		if (value.length > 0) {
+			addComment(postID, { description: value }, currentUser.token).then(
+				(data) => {
+					if (!data.error) {
+						dispatch(
+							addCommentToReduxStore(
+								{ ...data, user: currentUser },
+								postID
+							)
+						);
+					}
 				}
-			}
-		);
+			);
+		}
 	};
 
 	const hideAlert = () => {
