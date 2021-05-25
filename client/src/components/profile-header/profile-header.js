@@ -123,6 +123,9 @@ const ProfileHeader = ({ profile }) => {
 	};
 
 	const removeFromFriends = () => {
+		dispatch(hideModal());
+		dispatch(showModal("removing the user from friends..."));
+
 		removeFriend(profile.user._id, currentUser.token).then((data) => {
 			dispatch(hideModal());
 

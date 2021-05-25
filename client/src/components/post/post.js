@@ -68,6 +68,9 @@ const Post = ({
 	};
 
 	const deletePost = () => {
+		dispatch(hideModal());
+		dispatch(showModal("deleting the post..."));
+
 		editOrDeletePost("delete", _id, null, currentUser.token).then(
 			(data) => {
 				dispatch(hideModal());

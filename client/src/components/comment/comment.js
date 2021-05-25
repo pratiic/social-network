@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import "./comment.scss";
+
+import { showNotification } from "../../redux/notification/notification.actions";
 
 import { CurrentUserContext } from "../../contexts/current-user.context";
 
@@ -22,6 +26,10 @@ import ContentControl from "../content-control/content-control";
 const Comment = ({ user, description, likedBy, dislikedBy, _id }) => {
 	const [currentUser, setCurrentUser] = useContext(CurrentUserContext);
 
+	const history = useHistory();
+
+	const dispatch = useDispatch();
+
 	const handleLikeButtonClick = () => {
 		likeOrDislikeComment("like", _id, currentUser.token).then((data) => {
 			console.log(data);
@@ -37,14 +45,22 @@ const Comment = ({ user, description, likedBy, dislikedBy, _id }) => {
 	const handleDeleteButtonClick = () => {
 		deleteOrEditComment("delete", _id, null, currentUser.token).then(
 			(data) => {
-				console.log(data);
+				if (data.message === "deleted") {
+					dispatch(
+						showNotification(true, "comment has been deleted")
+					);
+				}
 			}
 		);
 	};
 
+	const handleCommentHeaderClick = () => {
+		history.push(`/profile/view/${user._id}`);
+	};
+
 	return (
 		<div className="comment">
-			<div className="comment-header">
+			<div className="comment-header" onClick={handleCommentHeaderClick}>
 				<ProfilePicture
 					profilePictureURL={user.profilePictureURL}
 					profilePicture={user.profilePicture}

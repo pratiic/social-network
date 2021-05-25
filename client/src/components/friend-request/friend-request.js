@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import "./friend-request.scss";
 
 import { showNotification } from "../../redux/notification/notification.actions";
+import { hideModal, showModal } from "../../redux/modal/modal.actions";
 
 import { CurrentUserContext } from "../../contexts/current-user.context";
 
@@ -29,7 +30,11 @@ const FriendRequest = ({ user, removeFriendRequest }) => {
 	const dispatch = useDispatch();
 
 	const handleAcceptButtonClick = () => {
+		dispatch(showModal("adding the user to friends..."));
+
 		acceptFriendRequest(user, currentUser.token).then((data) => {
+			dispatch(hideModal());
+
 			if (data.message === "added to friends") {
 				dispatch(showNotification(true, "added to friends"));
 			}

@@ -6,6 +6,7 @@ import io from "socket.io-client";
 import "./chat.scss";
 
 import {
+	addMessage,
 	addMessages,
 	deleteNewMessages,
 	resetChat,
@@ -95,22 +96,24 @@ const Chat = ({ messages, chatID, currentChatUser }) => {
 				currentUser.token
 			).then((data) => {
 				if (!data.error) {
-					addMessage(message);
+					sendMessageToChatUser(message);
 				}
 			});
 		}
 
-		addMessage(message);
+		sendMessageToChatUser(message);
 	};
 
-	const addMessage = (message) => {
+	const sendMessageToChatUser = (message) => {
 		console.log(chatID);
 		createMessage(
 			chatID,
 			{ text: message, to: currentChatUser._id },
 			currentUser.token
 		).then((data) => {
-			console.log(data);
+			if (!data.error) {
+				dispatch(addMessage(data));
+			}
 		});
 	};
 
@@ -136,7 +139,7 @@ const Chat = ({ messages, chatID, currentChatUser }) => {
 				messages={messages}
 				messagesMessage={messagesMessage}
 			/>
-			{/* {friends ? (
+			{friends ? (
 				<InputBox
 					placeholder="write a message..."
 					formSubmitHandler={handleFormSubmit}
@@ -146,12 +149,7 @@ const Chat = ({ messages, chatID, currentChatUser }) => {
 				<div className="user-not-available text-smaller">
 					you cannot chat with this user anymore
 				</div>
-			)} */}
-			<InputBox
-				placeholder="write a message..."
-				formSubmitHandler={handleFormSubmit}
-				changeHandler={handleInputChange}
-			/>
+			)}
 		</div>
 	);
 };

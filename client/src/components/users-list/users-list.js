@@ -9,7 +9,9 @@ const UsersList = ({ users }) => {
 	return (
 		<div className="users-list">
 			{users.map((user) => {
-				return <User user={user} />;
+				return (
+					<User user={user} key={user.username ? user._id : user} />
+				);
 			})}
 		</div>
 	);

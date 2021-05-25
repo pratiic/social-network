@@ -119,6 +119,7 @@ const Navbar = ({ newNotifications, newChats, newMessages, showNavbar }) => {
 						className={`nav-link text-small capitalize ${
 							navLink.active ? "active" : null
 						} ${navLink.count > 0 ? "display" : null}`}
+						key={navLink.value}
 						onClick={handleLinkClick}
 					>
 						{" "}

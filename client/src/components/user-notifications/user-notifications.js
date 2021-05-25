@@ -49,7 +49,12 @@ const UserNotifications = ({ userNotifications }) => {
 
 			{userNotifications.length > 0 ? (
 				userNotifications.map((userNotification) => {
-					return <UserNotification {...userNotification} />;
+					return (
+						<UserNotification
+							{...userNotification}
+							key={userNotification._id}
+						/>
+					);
 				})
 			) : userNotificationsMessage === "loading notifications..." ? (
 				<p className="info-message text-small">

@@ -22,7 +22,12 @@ const FriendRequests = () => {
 			<PageTitle title="friend requests" />
 			{currentUserProfile.friendRequests.length > 0 ? (
 				currentUserProfile.friendRequests.map((friendRequest) => {
-					return <FriendRequest user={friendRequest} />;
+					return (
+						<FriendRequest
+							user={friendRequest}
+							key={friendRequest}
+						/>
+					);
 				})
 			) : (
 				<NoFriendRequestsHuman className="human" />

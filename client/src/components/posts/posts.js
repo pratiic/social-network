@@ -36,7 +36,7 @@ import Alert from "../alert/alert";
 import Reload from "../reload/reload";
 import Button from "../button/button";
 
-const Posts = ({ posts, newNotifications }) => {
+const Posts = ({ posts, newNotifications, userNotifications }) => {
 	const [postsMessage, setPostsMessage] = useState("");
 	const [showAlert, setShowAlert] = useState(false);
 	const [showReload, setShowReload] = useState(false);
@@ -84,8 +84,9 @@ const Posts = ({ posts, newNotifications }) => {
 			if (notification.to == currentUser._id) {
 				getUser(notification.from, currentUser.token).then((data) => {
 					if (!data.error) {
-						dispatch(addUserNotification({ ...data, user: data }));
-						// dispatch(increaseNewNotificationsNumber());
+						dispatch(
+							addUserNotification({ ...notification, user: data })
+						);
 						fetchNewNotificationsNumber();
 						dispatch(
 							showNotification(
@@ -102,7 +103,9 @@ const Posts = ({ posts, newNotifications }) => {
 				});
 			}
 		});
+	}, []);
 
+	useEffect(() => {
 		fetchNewNotificationsNumber();
 	}, []);
 
@@ -175,6 +178,7 @@ const mapStateToProps = (state) => {
 	return {
 		posts: postsSelector(state),
 		newNotifications: state.userNotifications.newNotifications,
+		userNotifications: state.userNotifications.userNotifications,
 	};
 };
 

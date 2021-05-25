@@ -10,7 +10,10 @@ export const userNotificationsReducer = (state = INITIAL_STATE, action) => {
 		case "SET_NEW_NOTIFICATIONS_NUMBER":
 			return { ...state, newNotifications: action.payload };
 		case "ADD_USER_NOTIFICATION":
-			return { ...state, userNotifications: action.payload };
+			return {
+				...state,
+				userNotifications: [action.payload, ...state.userNotifications],
+			};
 		case "INCREASE_NEW_NOTIFICATIONS_NUMBER":
 			return { ...state, newNotifications: state.newNotifications + 1 };
 		default:

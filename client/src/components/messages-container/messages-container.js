@@ -36,9 +36,10 @@ const MessagesContainer = ({
 			"messageAdded",
 			(data) => {
 				if (chatID) {
-					console.log(chatID);
-					console.log(data);
-					if (data.chat == chatID) {
+					if (
+						data.chat == chatID &&
+						data.user == currentChatUser._id
+					) {
 						dispatch(addMessage(data));
 					}
 				}
@@ -56,6 +57,7 @@ const MessagesContainer = ({
 			console.log("pratiic");
 			if (data.userID == currentChatUser._id) {
 				setTyping(true);
+				bottomDivRef.current.scrollIntoView();
 			}
 		});
 
@@ -98,6 +100,8 @@ const MessagesContainer = ({
 					{" "}
 					<ProfilePicture
 						profilePictureURL={currentChatUser.profilePictureURL}
+						profilePicture={currentChatUser.profilePicture}
+						id={currentChatUser._id}
 						size="smallest"
 					/>{" "}
 					<p className="text text-smaller">typing...</p>

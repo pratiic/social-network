@@ -54,7 +54,6 @@ const Comments = ({ postID, comments }) => {
 
 		socket.on("commentDeleted", (data) => {
 			dispatch(deleteComment(postID, data._id));
-			dispatch(showNotification(true, "comment has been deleted"));
 		});
 	}, []);
 
