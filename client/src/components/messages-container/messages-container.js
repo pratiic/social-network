@@ -30,7 +30,7 @@ const MessagesContainer = ({
 	const bottomDivRef = useRef();
 
 	useEffect(() => {
-		const socket = io("https://socialnetworkawesome.herokuapp.com/");
+		const socket = io("https://socialnetworkawesome.herokuapp.com");
 
 		socket.on(
 			"messageAdded",
@@ -53,6 +53,7 @@ const MessagesContainer = ({
 		});
 
 		socket.on("typing", (data) => {
+			console.log("pratiic");
 			if (data.userID == currentChatUser._id) {
 				setTyping(true);
 			}

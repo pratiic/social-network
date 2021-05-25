@@ -5,6 +5,8 @@ import { useHistory } from "react-router-dom";
 import "./post.scss";
 
 import { showNotification } from "../../redux/notification/notification.actions";
+import { setEditingFields } from "../../redux/posts/posts.actions";
+import { hideModal, showModal } from "../../redux/modal/modal.actions";
 
 import { CurrentUserContext } from "../../contexts/current-user.context";
 
@@ -23,7 +25,7 @@ import { ReactComponent as ImageIcon } from "../../assets/icons/image.svg";
 import ProfilePicture from "../profile-picture/profile-picture";
 import ContentControl from "../content-control/content-control";
 import Comments from "../comments/comments";
-import { setEditingFields } from "../../redux/posts/posts.actions";
+import Modal from "../modal/modal";
 
 const Post = ({
 	description,
@@ -60,8 +62,16 @@ const Post = ({
 	};
 
 	const handleDeleteButtonClick = () => {
+		dispatch(
+			showModal("are you sure you want to delete this post ?", deletePost)
+		);
+	};
+
+	const deletePost = () => {
 		editOrDeletePost("delete", _id, null, currentUser.token).then(
 			(data) => {
+				dispatch(hideModal());
+
 				if (data.message === "deleted") {
 					dispatch(
 						showNotification(

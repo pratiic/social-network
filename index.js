@@ -24,20 +24,18 @@ io.on("connect_error", (error) => {
 });
 
 io.on("connection", (socket) => {
-	let userID;
-
+	console.log("connected");
 	socket.on("typing", (data) => {
-		userID = data.userID;
-
+		console.log("pratiic");
 		socket.broadcast.emit("typing", data);
 	});
 
 	socket.on("not-typing", (data) => {
+		console.log("pratiic");
 		socket.broadcast.emit("not-typing", data);
 	});
 
 	socket.on("disconnect", () => {
-		console.log(userID);
 		console.log("user disconnected");
 	});
 });

@@ -10,7 +10,7 @@ const Image = require("../models/Image");
 const router = express.Router();
 
 //create a post
-const upload = getUpload(2);
+const upload = getUpload(5);
 
 router.post(
 	"/",

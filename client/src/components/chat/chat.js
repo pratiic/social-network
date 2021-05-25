@@ -77,7 +77,7 @@ const Chat = ({ messages, chatID, currentChatUser }) => {
 	}, [chatID]);
 
 	useEffect(() => {
-		setSocket(io("http://socialnetworkawesome.herokuapp.com//"));
+		setSocket(io("https://socialnetworkawesome.herokuapp.com"));
 	}, []);
 
 	const handleFormSubmit = (event, message) => {

@@ -6,6 +6,7 @@ import "./profile-header.scss";
 
 import { showNotification } from "../../redux/notification/notification.actions";
 import { setCurrentChatUser } from "../../redux/chat/chat.actions";
+import { hideModal, showModal } from "../../redux/modal/modal.actions";
 
 import { CurrentUserContext } from "../../contexts/current-user.context";
 
@@ -113,7 +114,18 @@ const ProfileHeader = ({ profile }) => {
 	};
 
 	const handleRemoveFriendButtonClick = () => {
+		dispatch(
+			showModal(
+				"are you sure you want to remove this user as your friend ?",
+				removeFromFriends
+			)
+		);
+	};
+
+	const removeFromFriends = () => {
 		removeFriend(profile.user._id, currentUser.token).then((data) => {
+			dispatch(hideModal());
+
 			if (data.message === "removed from friends") {
 				setFriends(false);
 				dispatch(

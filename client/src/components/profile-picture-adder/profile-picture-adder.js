@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import "./profile-picture-adder.scss";
 
 import { showNotification } from "../../redux/notification/notification.actions";
+import { hideModal, showModal } from "../../redux/modal/modal.actions";
 
 import { CurrentUserContext } from "../../contexts/current-user.context";
 
@@ -58,9 +59,18 @@ const ProfilePictureAdder = () => {
 			const formData = new FormData();
 			formData.append("profilePicture", file);
 
+			dispatch(
+				showModal(
+					` ${
+						add ? "adding" : "changing"
+					} your profile picture. This might take a while...`
+				)
+			);
+
 			addProfilePicture(formData, currentUser.token).then((data) => {
 				console.log(data);
 				setUploading(false);
+				dispatch(hideModal());
 				if (data.error) {
 					if (data.error === "please upload an image") {
 						return setError(
@@ -69,7 +79,7 @@ const ProfilePictureAdder = () => {
 					}
 					if (data.error === "File too large") {
 						return setError(
-							"you can only upload images upto 1 mb in size"
+							"you can only upload images upto 4 mb in size"
 						);
 					}
 				} else {

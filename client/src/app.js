@@ -40,6 +40,7 @@ import UserPosts from "./components/user-posts/user-posts";
 import Chats from "./components/chats/chats";
 import Chat from "./components/chat/chat";
 import ProfilePictureAdder from "./components/profile-picture-adder/profile-picture-adder";
+import Modal from "./components/modal/modal";
 
 const App = ({ currentChatUser }) => {
 	const [
@@ -117,6 +118,7 @@ const App = ({ currentChatUser }) => {
 	return (
 		<div className="app">
 			<BrowserRouter>
+				<Modal title="are you sure?" options={true} />
 				<Header />
 				<Notification />
 				<Switch>

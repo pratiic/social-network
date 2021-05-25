@@ -41,7 +41,7 @@ const router = express.Router();
 // );
 
 //create a user image
-const upload = getUpload(1);
+const upload = getUpload(4);
 
 router.post(
 	"/user",

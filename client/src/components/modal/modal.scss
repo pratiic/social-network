@@ -1,0 +1,60 @@
+@import "../../scss/variables";
+
+.modal-container {
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 7;
+	justify-content: center;
+	align-items: center;
+	display: none;
+	padding: 0 2rem;
+
+	.modal {
+		background-color: $color-powder-blue;
+		padding: 2.5rem;
+		border-radius: 5px;
+		box-shadow: 0 0 2.5rem 0 rgba(0, 0, 0, 0.3);
+
+		.modal-title {
+			color: $color-prussian-blue;
+			text-align: center;
+			margin-bottom: 0.75rem;
+
+			&::first-letter {
+				text-transform: uppercase;
+			}
+		}
+
+		.buttons {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-top: 5rem;
+
+			& > *:first-child {
+				margin-right: 0.75rem;
+			}
+
+			@media screen and (max-width: 500px) {
+				margin-top: 4rem;
+			}
+		}
+
+		svg {
+			height: 2.5rem;
+			width: 2.5rem;
+			display: block;
+			margin: auto;
+		}
+
+		&.smaller {
+			padding: 0.75rem;
+		}
+	}
+
+	&.show {
+		display: flex;
+	}
+}

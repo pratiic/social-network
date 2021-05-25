@@ -21,7 +21,6 @@ router.post("/:chatID", auth, async (request, response) => {
 
 	try {
 		const savedChat = await chat.save();
-		console.log(savedChat);
 		response.status(201).send(savedChat);
 	} catch (error) {
 		response.status(500).send(error);
@@ -36,8 +35,6 @@ router.get("/", auth, async (request, response) => {
 	})
 		.sort({ updatedAt: -1 })
 		.populate("users");
-
-	console.log(chats);
 
 	if (chats.length === 0) {
 		return response.status(400).send({ error: "chats not found" });

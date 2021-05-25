@@ -126,6 +126,17 @@ router.delete("/:userID", auth, async (request, response) => {
 
 	friendProfile.friends.pull(request.user);
 
+	await Promise.all([
+		Post.updateMany(
+			{ user: request.user },
+			{ $pull: { for: request.params.userID } }
+		),
+		Post.updateMany(
+			{ user: request.params.userID },
+			{ $pull: { for: request.user } }
+		),
+	]);
+
 	try {
 		await Promise.all([profile.save(), friendProfile.save()]);
 		response.send({ message: "removed from friends" });

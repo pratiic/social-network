@@ -39,6 +39,8 @@ const Message = ({ text, user, currentChatUser, createdAt, seen }) => {
 			{user != currentUser._id ? (
 				<ProfilePicture
 					profilePictureURL={currentChatUser.profilePictureURL}
+					profilePicture={currentChatUser.profilePicture}
+					id={user}
 					size="smallest"
 				/>
 			) : null}

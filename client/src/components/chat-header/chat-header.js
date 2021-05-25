@@ -23,6 +23,8 @@ const ChatHeader = ({ currentChatUser }) => {
 			<ProfilePreview
 				username={currentChatUser.username}
 				profilePictureURL={currentChatUser.profilePictureURL}
+				profilePicture={currentChatUser.profilePicture}
+				id={currentChatUser._id}
 				clickHandler={handleProfilePreviewClick}
 			/>
 		</div>

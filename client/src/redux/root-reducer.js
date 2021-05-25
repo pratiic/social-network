@@ -6,6 +6,7 @@ import { notificationReducer } from "./notification/notification.reducer";
 import { userNotificationsReducer } from "./user-notifications/user-notifications.reducer";
 import { chatReducer } from "./chat/chat.reducer";
 import { navbarReducer } from "./navbar/navbar.reducer";
+import { modalReducer } from "./modal/modal.reducer";
 
 export default combineReducers({
 	posts: postsReducer,
@@ -14,4 +15,5 @@ export default combineReducers({
 	userNotifications: userNotificationsReducer,
 	chat: chatReducer,
 	navbar: navbarReducer,
+	modal: modalReducer,
 });

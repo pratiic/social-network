@@ -9,6 +9,7 @@ import {
 	resetEditingFields,
 } from "../../redux/posts/posts.actions";
 import { showNotification } from "../../redux/notification/notification.actions";
+import { hideModal, showModal } from "../../redux/modal/modal.actions";
 
 import { CurrentUserContext } from "../../contexts/current-user.context";
 import { PostsContext } from "../../contexts/posts.context";
@@ -47,6 +48,8 @@ const PostCreator = ({ posts, postTypeRedux, editingPost, postID }) => {
 			console.log(editingPost, postType);
 
 			if (editingPost && postType === "text") {
+				dispatch(showModal("editing the post..."));
+
 				return editOrDeletePost(
 					"edit",
 					postID,
@@ -54,6 +57,7 @@ const PostCreator = ({ posts, postTypeRedux, editingPost, postID }) => {
 					currentUser.token
 				).then((data) => {
 					setPosting(false);
+					dispatch(hideModal());
 
 					if (data.message === "updated") {
 						setPosted(true);
@@ -65,9 +69,12 @@ const PostCreator = ({ posts, postTypeRedux, editingPost, postID }) => {
 				});
 			}
 
+			dispatch(showModal("creating your post..."));
+
 			createPost("text", { description: post }, currentUser.token).then(
 				(data) => {
 					setPosting(false);
+					dispatch(hideModal());
 
 					if (!data.error) {
 						dispatch(addPost({ ...data, user: currentUser }));
@@ -90,6 +97,8 @@ const PostCreator = ({ posts, postTypeRedux, editingPost, postID }) => {
 		clearError();
 
 		if (editingPost && postType === "image") {
+			dispatch(showModal("editing the post..."));
+
 			return editOrDeletePost(
 				"edit",
 				postID,
@@ -97,6 +106,7 @@ const PostCreator = ({ posts, postTypeRedux, editingPost, postID }) => {
 				currentUser.token
 			).then((data) => {
 				setPosting(false);
+				dispatch(hideModal());
 
 				if (data.message === "updated") {
 					setPosted(true);
@@ -114,8 +124,11 @@ const PostCreator = ({ posts, postTypeRedux, editingPost, postID }) => {
 		formData.append("postImage", post.file);
 		formData.append("description", post.description);
 
+		dispatch(showModal("creating the post. This may take a while..."));
+
 		createPost("image", formData, currentUser.token).then((data) => {
 			setPosting(false);
+			dispatch(hideModal());
 
 			if (!data.error) {
 				dispatch(addPost({ ...data, user: currentUser }));
@@ -132,7 +145,7 @@ const PostCreator = ({ posts, postTypeRedux, editingPost, postID }) => {
 					}
 					if (data.error === "File too large") {
 						return setError(
-							"you can only upload images upto 2 mb in size"
+							"you can only upload images upto 5 mb in size"
 						);
 					}
 				}
