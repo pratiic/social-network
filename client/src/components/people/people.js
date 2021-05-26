@@ -1,6 +1,10 @@
 import React, { useEffect, useContext, useState } from "react";
+import { connect, useDispatch } from "react-redux";
+import io from "socket.io-client";
 
 import "./people.scss";
+
+import { setPeople, setPerson } from "../../redux/people/people.actions";
 
 import { CurrentUserContext } from "../../contexts/current-user.context";
 
@@ -14,35 +18,43 @@ import UsersList from "../users-list/users-list";
 import UserSearch from "../user-search/user-search";
 import Button from "../button/button";
 
-const People = () => {
-	const [people, setPeople] = useState([]);
+const People = ({ people }) => {
 	const [peopleMessage, setPeopleMessage] = useState("");
 	const [searching, setSearching] = useState(false);
 	const [search, setSearch] = useState(false);
 
 	const [currentUser, setCurrentUser] = useContext(CurrentUserContext);
 
+	const dispatch = useDispatch();
+
 	useEffect(() => {
 		setPeopleMessage("loading people...");
 
 		fetchUsers();
+
+		const socket = io("http://localhost:5000");
+
+		socket.on("userAdded", (data) => {
+			console.log(data);
+			dispatch(setPerson(data));
+		});
 	}, []);
 
 	const handleFormSubmit = (search) => {
 		setSearching(true);
 		setSearch(true);
 		setPeopleMessage("searching...");
-		setPeople([]);
+		dispatch(setPeople([]));
 
 		searchUser(search, currentUser.token).then((data) => {
 			setPeopleMessage("");
 			setSearching(false);
 
 			if (data.error) {
-				return setPeople([]);
+				return dispatch(setPeople([]));
 			}
 
-			setPeople(data);
+			dispatch(setPeople(data));
 		});
 	};
 
@@ -58,7 +70,7 @@ const People = () => {
 
 	const handleResetButtonClick = () => {
 		setSearch(false);
-		setPeople([]);
+		dispatch(setPeople([]));
 		fetchUsers();
 	};
 
@@ -67,7 +79,7 @@ const People = () => {
 			setPeopleMessage("");
 
 			if (!data.error) {
-				setPeople(data);
+				dispatch(setPeople(data));
 			}
 		});
 	};
@@ -114,4 +126,10 @@ const People = () => {
 	);
 };
 
-export default People;
+const mapStateToProps = (state) => {
+	return {
+		people: state.people.people,
+	};
+};
+
+export default connect(mapStateToProps)(People);

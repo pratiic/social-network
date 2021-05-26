@@ -3,8 +3,12 @@
 .posts {
 	margin-top: 1.5rem;
 
-	.info-message {
+	.info-message-no-posts {
 		margin-top: 3.5rem;
+	}
+
+	.info-message-posts {
+		margin-bottom: 0.75rem;
 	}
 
 	.icon-bigger {

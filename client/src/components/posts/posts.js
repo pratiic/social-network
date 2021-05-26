@@ -40,6 +40,8 @@ const Posts = ({ posts, newNotifications, userNotifications }) => {
 	const [postsMessage, setPostsMessage] = useState("");
 	const [showAlert, setShowAlert] = useState(false);
 	const [showReload, setShowReload] = useState(false);
+	const [reloaded, setReloaded] = useState(false);
+	const [fetchingNewPosts, setFetchingNewPosts] = useState(false);
 
 	const [
 		currentUser,
@@ -58,8 +60,6 @@ const Posts = ({ posts, newNotifications, userNotifications }) => {
 		});
 
 		socket.on("postAdded", (data) => {
-			console.log(data);
-
 			if (
 				data.user != currentUser._id &&
 				data.for.some((dataItem) => dataItem == currentUser._id)
@@ -70,7 +70,6 @@ const Posts = ({ posts, newNotifications, userNotifications }) => {
 		});
 
 		socket.on("postDeleted", (data) => {
-			console.log(data);
 			dispatch(deletePost(data));
 		});
 
@@ -110,10 +109,17 @@ const Posts = ({ posts, newNotifications, userNotifications }) => {
 	}, []);
 
 	useEffect(() => {
-		return () => {
-			dispatch(addPosts([]));
-		};
-	}, []);
+		if (reloaded) {
+			setFetchingNewPosts(true);
+			fetchPosts();
+		}
+	}, [reloaded]);
+
+	// useEffect(() => {
+	// 	return () => {
+	// 		dispatch(addPosts([]));
+	// 	};
+	// }, []);
 
 	const fetchNewNotificationsNumber = () => {
 		getNotificationsNumber(currentUser.token).then((data) => {
@@ -138,12 +144,25 @@ const Posts = ({ posts, newNotifications, userNotifications }) => {
 			}
 
 			setPostsMessage("");
+
+			if (posts.length > 0 && data.length > posts.length && !reloaded) {
+				setShowAlert(true);
+				setShowReload(true);
+				return;
+			}
+
 			dispatch(addPosts(data));
+			setReloaded(false);
+			setFetchingNewPosts(false);
 		});
 	};
 
 	const hideAlert = () => {
 		setShowAlert(false);
+	};
+
+	const handleReloadButtonClick = () => {
+		setReloaded(true);
 	};
 
 	return (
@@ -156,15 +175,24 @@ const Posts = ({ posts, newNotifications, userNotifications }) => {
 					position="fixed"
 				/>
 			) : null}
-			{showReload ? (
-				<Reload text="new posts" clickHandler={fetchPosts} />
+			{showReload && !fetchingNewPosts ? (
+				<Reload
+					text="new posts"
+					clickHandler={handleReloadButtonClick}
+				/>
+			) : fetchingNewPosts ? (
+				<p className="info-message info-message-posts text-smaller">
+					fetching new posts...
+				</p>
 			) : null}
 			{posts.length > 0 ? (
 				posts.map((post) => {
 					return <Post {...post} key={post._id} />;
 				})
 			) : postsMessage === "loading posts..." ? (
-				<p className="info-message text-small">{postsMessage}</p>
+				<p className="info-message info-message-no-posts text-small">
+					{postsMessage}
+				</p>
 			) : currentUserProfile.friends.length === 0 ? (
 				<NoFriendsPostsHuman className="human" />
 			) : (

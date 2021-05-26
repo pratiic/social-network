@@ -23,6 +23,8 @@ const UserPosts = ({ currentlyViewedProfile, userPosts }) => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
+		dispatch(addPosts([]));
+
 		setUserPostsMessage("loading posts...");
 
 		getUserPosts(params.id, currentUser.token).then((data) => {

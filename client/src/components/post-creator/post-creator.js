@@ -117,7 +117,8 @@ const PostCreator = ({ posts, postTypeRedux, editingPost, postID }) => {
 		}
 
 		if (!post.file) {
-			return setError("you haven't selected an image");
+			setError("you haven't selected an image");
+			return setPosting(false);
 		}
 
 		const formData = new FormData();

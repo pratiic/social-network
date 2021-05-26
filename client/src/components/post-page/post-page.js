@@ -24,6 +24,8 @@ const PostPage = ({ post }) => {
 	const [currentUser, setCurrentUser] = useContext(CurrentUserContext);
 
 	useEffect(() => {
+		dispatch(addPosts([]));
+
 		setPostMessage("loading post...");
 
 		getPost(params.id, currentUser.token).then((data) => {

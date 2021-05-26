@@ -176,6 +176,18 @@ connection.once("open", () => {
 				break;
 		}
 	});
+
+	const usersChangeStream = connection.collection("users").watch();
+
+	usersChangeStream.on("change", (change) => {
+		switch (change.operationType) {
+			case "insert":
+				io.emit("userAdded", {
+					...change.fullDocument,
+				});
+				break;
+		}
+	});
 });
 
 if (process.env.NODE_ENV === "production") {

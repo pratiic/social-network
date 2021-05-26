@@ -10,7 +10,6 @@ import {
 	deleteComment,
 	updateComment,
 } from "../../redux/posts/posts.actions";
-import { showNotification } from "../../redux/notification/notification.actions";
 
 import { CurrentUserContext } from "../../contexts/current-user.context";
 
@@ -27,6 +26,7 @@ const Comments = ({ postID, comments }) => {
 	const [commentsMessage, setCommentsMessage] = useState("");
 	const [showAlert, setShowAlert] = useState(false);
 	const [showReload, setShowReload] = useState(false);
+	const [commenting, setCommenting] = useState(false);
 
 	const [currentUser, setCurrentUser] = useContext(CurrentUserContext);
 
@@ -73,26 +73,16 @@ const Comments = ({ postID, comments }) => {
 		});
 	};
 
-	// useEffect(() => {
-	// 	if (comments.length > 0) {
-	// 		setComments(
-	// 			comments.map((comment) => {
-	// 				if (comment._id == commentUpdatedData._id) {
-	// 					return { ...comment, ...commentUpdatedData };
-	// 				}
-
-	// 				return comment;
-	// 			})
-	// 		);
-	// 	}
-	// }, [commentUpdatedData]);
-
 	const handleCommentSubmit = (event, value) => {
 		event.preventDefault();
+
+		setCommenting(true);
 
 		if (value.length > 0) {
 			addComment(postID, { description: value }, currentUser.token).then(
 				(data) => {
+					setCommenting(false);
+
 					if (!data.error) {
 						dispatch(
 							addCommentToReduxStore(
@@ -123,6 +113,12 @@ const Comments = ({ postID, comments }) => {
 
 			{showReload ? (
 				<Reload text="new comments" clickHandler={fetchComments} />
+			) : null}
+
+			{commenting ? (
+				<p className="info-message text-smaller info-message-posting-comment">
+					posting your comment...
+				</p>
 			) : null}
 
 			<div className="comments-main">
