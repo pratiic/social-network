@@ -40,3 +40,21 @@ export const getTime = (fullDate) => {
 		minutes >= 10 ? minutes : `0${minutes}`
 	} ${amPm}`;
 };
+
+export const getHowLong = (fullDate) => {
+	const postedTimeMilliseconds = new Date(fullDate).getTime();
+	const millisecondsNow = Date.now();
+
+	const difference = millisecondsNow - postedTimeMilliseconds;
+	const differenceInSeconds = Math.round(difference / 1000);
+
+	if (differenceInSeconds < 60) {
+		return "few secs ago";
+	} else if (differenceInSeconds < 3600) {
+		return `${Math.round(differenceInSeconds / 60)} min`;
+	} else if (differenceInSeconds < 86400) {
+		return `${Math.round(differenceInSeconds / 3600)} hr`;
+	} else {
+		return `${Math.round(differenceInSeconds / 86400)}d`;
+	}
+};

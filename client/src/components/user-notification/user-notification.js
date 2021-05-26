@@ -10,6 +10,7 @@ import { CurrentUserContext } from "../../contexts/current-user.context";
 
 import { getNotificationMessage } from "../utils/utils.notifications";
 import { deleteNotification } from "../../api/api.notifications";
+import { getHowLong } from "../utils/utils.date-and-time";
 
 import { ReactComponent as ClearIcon } from "../../assets/icons/clear.svg";
 
@@ -23,6 +24,7 @@ const UserNotification = ({
 	type,
 	seen,
 	_id,
+	createdAt,
 	userNotifications,
 }) => {
 	const [currentUser, setCurrentUser] = useContext(CurrentUserContext);
@@ -77,9 +79,12 @@ const UserNotification = ({
 							profilePicture={from.profilePicture}
 							id={from._id}
 						/>
-						<p className="user-notification-text text-small">
-							{getNotificationMessage(from, action, postID, type)}
-						</p>
+						<div className="user-notification-text text-small">
+							{getNotificationMessage(from, action, postID, type)}{" "}
+							<p className="time-duration">
+								{getHowLong(createdAt)}
+							</p>
+						</div>
 					</div>
 					<ClearIcon
 						className="icon"

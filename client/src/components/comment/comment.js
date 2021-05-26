@@ -14,6 +14,7 @@ import {
 	deleteOrEditComment,
 } from "../../api/api.comments";
 import { likedOrDislikedOrNot } from "../utils/utils.posts";
+import { getHowLong } from "../utils/utils.date-and-time";
 
 import { ReactComponent as ThumbsUpIcon } from "../../assets/icons/thumbs-up.svg";
 import { ReactComponent as ThumbsDownIcon } from "../../assets/icons/thumbs-down.svg";
@@ -23,7 +24,14 @@ import { ReactComponent as TrashCanIcon } from "../../assets/icons/trash-can.svg
 import ProfilePicture from "../profile-picture/profile-picture";
 import ContentControl from "../content-control/content-control";
 
-const Comment = ({ user, description, likedBy, dislikedBy, _id }) => {
+const Comment = ({
+	user,
+	description,
+	likedBy,
+	dislikedBy,
+	_id,
+	createdAt,
+}) => {
 	const [currentUser, setCurrentUser] = useContext(CurrentUserContext);
 
 	const history = useHistory();
@@ -61,13 +69,16 @@ const Comment = ({ user, description, likedBy, dislikedBy, _id }) => {
 	return (
 		<div className="comment">
 			<div className="comment-header" onClick={handleCommentHeaderClick}>
-				<ProfilePicture
-					profilePictureURL={user.profilePictureURL}
-					profilePicture={user.profilePicture}
-					id={user._id}
-					size="smaller"
-				/>
-				<p className="username text-small">{user.username}</p>
+				<div className="user-info">
+					<ProfilePicture
+						profilePictureURL={user.profilePictureURL}
+						profilePicture={user.profilePicture}
+						id={user._id}
+						size="smaller"
+					/>
+					<p className="username text-small">{user.username}</p>
+				</div>
+				<p className="time-duration">{getHowLong(createdAt)}</p>
 			</div>
 			<p className="comment-description text-small">{description}</p>
 			<div className="comment-footer">

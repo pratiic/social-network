@@ -41,6 +41,11 @@
 	.user-notification-text {
 		font-weight: 500;
 		color: $color-prussian-blue;
+
+		.time-duration {
+			display: inline-block;
+			margin-left: 0.75rem;
+		}
 	}
 
 	.deleted-notification {

@@ -11,7 +11,7 @@ import { hideModal, showModal } from "../../redux/modal/modal.actions";
 import { CurrentUserContext } from "../../contexts/current-user.context";
 
 import { getUser } from "../../api/api.user";
-import { getDate, getTime } from "../utils/utils.date-and-time";
+import { getDate, getTime, getHowLong } from "../utils/utils.date-and-time";
 import { editOrDeletePost, likeOrDislikePost } from "../../api/api.posts";
 import { likedOrDislikedOrNot } from "../utils/utils.posts";
 
@@ -119,7 +119,9 @@ const Post = ({
 					/>
 					<p className="username text-small">{user.username}</p>
 				</div>
-				<p className="date text-smallest">{getDate(createdAt)}</p>
+				<p className="time-duration text-smallest">
+					{getHowLong(createdAt)}
+				</p>
 			</div>
 			{image ? (
 				<div className="post-image" onClick={handlePostClick}>
@@ -136,10 +138,10 @@ const Post = ({
 				</p>
 			) : null}
 			<div className={`post-footer ${description ? "separate" : null}`}>
-				<div className="post-info">
+				{/* <div className="post-info">
 					<p className="date text-smallest">{getDate(createdAt)}</p>
 					<p className="time text-smallest"> {getTime(createdAt)} </p>
-				</div>
+				</div> */}
 				<div className="post-controls">
 					<ContentControl
 						count={likedBy.length}
@@ -187,7 +189,7 @@ const Post = ({
 							</ContentControl>
 						</React.Fragment>
 					) : null}
-					<p className="time text-smallest"> {getTime(createdAt)} </p>
+					{/* <p className="time text-smallest"> {getTime(createdAt)} </p> */}
 				</div>
 			</div>
 			{showComments ? (
