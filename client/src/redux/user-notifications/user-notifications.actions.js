@@ -31,3 +31,9 @@ export const checkAndAddUserNotification = (
 ) => {
 	return (dispatch) => {};
 };
+
+export const clearAllNotifications = () => {
+	return {
+		type: "CLEAR_ALL_NOTIFICATIONS",
+	};
+};

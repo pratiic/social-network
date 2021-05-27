@@ -79,4 +79,14 @@ router.delete("/:notificationID", async (request, response) => {
 	}
 });
 
+//delete all notifications of a user
+router.delete("/", auth, async (request, response) => {
+	try {
+		await Notification.deleteMany({ to: request.user });
+		response.send({ message: "deleted" });
+	} catch (error) {
+		response.status(500).send(error);
+	}
+});
+
 module.exports = router;

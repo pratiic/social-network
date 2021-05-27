@@ -1,0 +1,26 @@
+@import "../../scss/variables";
+
+.user-notifications {
+	.user-notifications-header {
+		display: flex;
+		align-items: center;
+
+		&.space {
+			justify-content: space-between;
+		}
+
+		&.no-space {
+			justify-content: center;
+		}
+	}
+
+	.user-notifications-clear {
+		color: $color-red;
+		font-weight: 500;
+		cursor: pointer;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}

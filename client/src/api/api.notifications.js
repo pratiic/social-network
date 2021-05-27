@@ -41,3 +41,14 @@ export const deleteNotification = async (notificationID, token) => {
 	const data = await result.json();
 	return data;
 };
+
+export const deleteAllNotifications = async (token) => {
+	const result = await fetch(`${baseURL}`, {
+		method: "DELETE",
+		headers: {
+			"auth-token": token,
+		},
+	});
+	const data = await result.json();
+	return data;
+};
