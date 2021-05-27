@@ -47,7 +47,7 @@ const Chat = ({ messages, chatID, currentChatUser }) => {
 
 		if (
 			!currentUserProfile.friends.some(
-				(friend) => friend == currentChatUser._id
+				(friend) => friend === currentChatUser._id
 			)
 		) {
 			setFriends(false);
@@ -105,7 +105,6 @@ const Chat = ({ messages, chatID, currentChatUser }) => {
 	};
 
 	const sendMessageToChatUser = (message) => {
-		console.log(chatID);
 		createMessage(
 			chatID,
 			{ text: message, to: currentChatUser._id },
@@ -127,7 +126,6 @@ const Chat = ({ messages, chatID, currentChatUser }) => {
 
 	const emitNotTypingEvent = () => {
 		if (socket) {
-			console.log("pratiic");
 			socket.emit("not-typing", { userID: currentUser._id });
 		}
 	};

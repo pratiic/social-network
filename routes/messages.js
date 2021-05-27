@@ -75,7 +75,6 @@ router.put("/seen/:chatID", auth, async (request, response) => {
 //get unseen messages
 router.get("/unseen/all", auth, async (request, response) => {
 	const messages = await Message.find({ to: request.user, seen: false });
-	console.log(messages);
 
 	if (messages.length === 0) {
 		return response.status(400).send({ error: "messages not found" });

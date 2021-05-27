@@ -60,8 +60,6 @@ class Register extends React.Component {
 			email: this.state.email,
 			password: this.state.password,
 		}).then((data) => {
-			console.log(data);
-
 			if (data.message === `"username" is not allowed to be empty`) {
 				this.setFieldError("username", "username cannot be empty");
 			} else if (data.message === `"email" is not allowed to be empty`) {

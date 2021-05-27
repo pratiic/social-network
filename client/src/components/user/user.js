@@ -22,7 +22,6 @@ const User = ({ user, clickHandler, count }) => {
 		}
 
 		getUser(user, currentUser.token).then((data) => {
-			console.log(data);
 			setUserToDisplay(data);
 		});
 	}, []);

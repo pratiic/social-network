@@ -15,6 +15,7 @@ import {
 import { postsSelector } from "../../redux/posts/posts.selectors";
 import {
 	addUserNotification,
+	checkAndAddUserNotification,
 	increaseNewNotificationsNumber,
 	setNewNotificationsNumber,
 } from "../../redux/user-notifications/user-notifications.actions";
@@ -61,8 +62,8 @@ const Posts = ({ posts, newNotifications, userNotifications }) => {
 
 		socket.on("postAdded", (data) => {
 			if (
-				data.user != currentUser._id &&
-				data.for.some((dataItem) => dataItem == currentUser._id)
+				data.user !== currentUser._id &&
+				data.for.some((dataItem) => dataItem === currentUser._id)
 			) {
 				setShowAlert(true);
 				setShowReload(true);
@@ -80,11 +81,18 @@ const Posts = ({ posts, newNotifications, userNotifications }) => {
 		const socket = io("https://socialnetworkawesome.herokuapp.com/");
 
 		socket.on("notificationAdded", (notification) => {
-			if (notification.to == currentUser._id) {
+			if (notification.to === currentUser._id) {
 				getUser(notification.from, currentUser.token).then((data) => {
 					if (!data.error) {
 						dispatch(
-							addUserNotification({ ...notification, user: data })
+							checkAndAddUserNotification(
+								{ ...notification, from: data },
+								userNotifications
+							)
+						);
+
+						dispatch(
+							addUserNotification({ ...notification, from: data })
 						);
 						fetchNewNotificationsNumber();
 						dispatch(

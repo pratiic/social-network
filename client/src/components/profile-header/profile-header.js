@@ -49,21 +49,21 @@ const ProfileHeader = ({ profile }) => {
 	useEffect(() => {
 		if (
 			currentUserProfile.friends.some(
-				(friend) => friend == profile.user._id
+				(friend) => friend === profile.user._id
 			)
 		) {
 			return setFriends(true);
 		}
 		if (
 			profile.friendRequests.some(
-				(friendRequest) => friendRequest == currentUser._id
+				(friendRequest) => friendRequest === currentUser._id
 			)
 		) {
 			return setFriendRequestSent(true);
 		}
 		if (
 			currentUserProfile.friendRequests.some(
-				(friendRequest) => friendRequest == profile.user._id
+				(friendRequest) => friendRequest === profile.user._id
 			)
 		) {
 			return setFriendRequest(true);

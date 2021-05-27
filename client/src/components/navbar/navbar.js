@@ -63,7 +63,6 @@ const Navbar = ({ newNotifications, newChats, newMessages, showNavbar }) => {
 	useEffect(() => {
 		setNavLinks(
 			navLinks.map((navLink) => {
-				console.log(navLink.count);
 				if (location.pathname.includes(navLink.linkTo)) {
 					return { ...navLink, active: true };
 				}

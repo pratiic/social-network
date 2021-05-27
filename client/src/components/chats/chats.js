@@ -71,7 +71,6 @@ const Chats = ({ chats, newChats, newMessages }) => {
 			if (data.error) {
 				return setChatsMessage("chats not found");
 			}
-			console.log(data);
 			dispatch(addChats(data));
 			setChatsMessage("");
 		});
@@ -92,13 +91,12 @@ const Chats = ({ chats, newChats, newMessages }) => {
 			) : null}
 			{chats.length > 0 ? (
 				chats.map((chat) => {
-					console.log(chat);
 					return (
 						<User
 							user={getOtherUser(chat)}
 							count={
 								newMessages.filter(
-									(newMessage) => newMessage.chat == chat._id
+									(newMessage) => newMessage.chat === chat._id
 								).length
 							}
 							clickHandler={handleUserClick}

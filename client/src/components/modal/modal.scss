@@ -16,6 +16,7 @@
 		padding: 2.5rem;
 		border-radius: 5px;
 		box-shadow: 0 0 2.5rem 0 rgba(0, 0, 0, 0.3);
+		position: relative;
 
 		.modal-title {
 			color: $color-prussian-blue;
@@ -47,6 +48,15 @@
 			width: 2.5rem;
 			display: block;
 			margin: auto;
+		}
+
+		.icon-modal-close {
+			position: absolute;
+			right: 0.75rem;
+			top: 0.75rem;
+			height: 1.5rem;
+			width: 1.5rem;
+			margin-bottom: 0.75rem;
 		}
 
 		&.smaller {

@@ -18,7 +18,7 @@ export const postsReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				posts: state.posts.map((post) => {
-					if (post._id == action.payload._id) {
+					if (post._id === action.payload._id) {
 						return {
 							...post,
 							...action.payload,
@@ -39,7 +39,7 @@ export const postsReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				posts: state.posts.filter((post) => {
-					return post._id != action.payload._id;
+					return post._id !== action.payload._id;
 				}),
 			};
 		case postsActionTypes.ADD_COMMENT:
@@ -56,11 +56,13 @@ export const postsReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				posts: state.posts.map((post) => {
-					if (post._id == action.payload.post) {
+					if (post._id === action.payload.post) {
 						return {
 							...post,
 							comments: post.comments.map((comment) => {
-								if (comment._id == action.payload.comment._id) {
+								if (
+									comment._id === action.payload.comment._id
+								) {
 									return {
 										...comment,
 										...action.payload.comment,
@@ -80,12 +82,12 @@ export const postsReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				posts: state.posts.map((post) => {
-					if (post._id == action.payload.post) {
+					if (post._id === action.payload.post) {
 						return {
 							...post,
 							comments: post.comments.filter(
 								(comment) =>
-									comment._id != action.payload.comment
+									comment._id !== action.payload.comment
 							),
 						};
 					}
@@ -114,7 +116,7 @@ export const postsReducer = (state = INITIAL_STATE, action) => {
 };
 
 const addPost = (postToBeAdded, state) => {
-	if (state.posts.some((post) => post._id == postToBeAdded._id)) {
+	if (state.posts.some((post) => post._id === postToBeAdded._id)) {
 		return [...state.posts];
 	} else {
 		return [postToBeAdded, ...state.posts];
@@ -123,7 +125,7 @@ const addPost = (postToBeAdded, state) => {
 
 const addComments = (many, state, action) => {
 	const comments = state.posts.map((post) => {
-		if (post._id == action.payload.post) {
+		if (post._id === action.payload.post) {
 			return {
 				...post,
 				comments: many

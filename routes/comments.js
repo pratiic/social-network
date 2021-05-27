@@ -99,8 +99,6 @@ router.delete("/:commentID", auth, async (request, response) => {
 		user: request.user,
 	});
 
-	console.log(comment);
-
 	if (!comment) {
 		return response.status(400).send({ message: "comment doesnot exist" });
 	}

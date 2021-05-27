@@ -10,7 +10,6 @@ const userRegistrationSchema = Joi.object({
 
 const validateUserRegistration = (user) => {
 	const validationResult = userRegistrationSchema.validate(user);
-	console.log(validationResult);
 	const error = checkForErrors(validationResult);
 	return error;
 };

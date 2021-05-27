@@ -19,25 +19,18 @@ const io = socketIO(server, {
 	},
 });
 
-io.on("connect_error", (error) => {
-	console.log(error);
-});
+io.on("connect_error", (error) => {});
 
 io.on("connection", (socket) => {
-	console.log("connected");
 	socket.on("typing", (data) => {
-		console.log("pratiic");
 		socket.broadcast.emit("typing", data);
 	});
 
 	socket.on("not-typing", (data) => {
-		console.log("pratiic");
 		socket.broadcast.emit("not-typing", data);
 	});
 
-	socket.on("disconnect", () => {
-		console.log("user disconnected");
-	});
+	socket.on("disconnect", () => {});
 });
 
 io.of("/api/socket").emit("event", { name: "pratiic" });
@@ -78,7 +71,6 @@ connection.once("open", () => {
 				});
 				break;
 			case "insert":
-				console.log(change);
 				io.emit("postAdded", {
 					...change.fullDocument,
 				});
@@ -103,13 +95,11 @@ connection.once("open", () => {
 				});
 				break;
 			case "update":
-				console.log(change);
 				io.emit("commentLikedOrDisliked", {
 					...change.fullDocument,
 				});
 				break;
 			case "delete":
-				console.log(change);
 				io.emit("commentDeleted", {
 					_id: change.documentKey._id,
 				});
@@ -169,7 +159,6 @@ connection.once("open", () => {
 	chatsChangeStream.on("change", (change) => {
 		switch (change.operationType) {
 			case "insert":
-				console.log(change);
 				io.emit("chatAdded", {
 					...change.fullDocument,
 				});

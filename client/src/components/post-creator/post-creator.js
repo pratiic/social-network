@@ -41,11 +41,8 @@ const PostCreator = ({ posts, postTypeRedux, editingPost, postID }) => {
 
 	const createTextPost = (post) => {
 		if (post.length !== 0) {
-			console.log(currentUser);
 			setPosting(true);
 			setPosted(false);
-
-			console.log(editingPost, postType);
 
 			if (editingPost && postType === "text") {
 				dispatch(showModal("editing the post..."));

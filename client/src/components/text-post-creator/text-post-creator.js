@@ -23,8 +23,6 @@ const TextPostCreator = ({
 	const inputRef = useRef();
 
 	useEffect(() => {
-		console.log(posted);
-
 		if (posted) {
 			setPost("");
 		}

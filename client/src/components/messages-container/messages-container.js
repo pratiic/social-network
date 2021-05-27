@@ -37,8 +37,8 @@ const MessagesContainer = ({
 			(data) => {
 				if (chatID) {
 					if (
-						data.chat == chatID &&
-						data.user == currentChatUser._id
+						data.chat === chatID &&
+						data.user === currentChatUser._id
 					) {
 						dispatch(addMessage(data));
 					}
@@ -48,21 +48,20 @@ const MessagesContainer = ({
 		);
 
 		socket.on("messageUpdated", (data) => {
-			if (data.chat == chatID) {
+			if (data.chat === chatID) {
 				dispatch(updateMessage(data));
 			}
 		});
 
 		socket.on("typing", (data) => {
-			console.log("pratiic");
-			if (data.userID == currentChatUser._id) {
+			if (data.userID === currentChatUser._id) {
 				setTyping(true);
 				bottomDivRef.current.scrollIntoView();
 			}
 		});
 
 		socket.on("not-typing", (data) => {
-			if (data.userID == currentChatUser._id) {
+			if (data.userID === currentChatUser._id) {
 				setTyping(false);
 			}
 		});
@@ -78,9 +77,7 @@ const MessagesContainer = ({
 		}
 
 		setMessagesSeen(chatID, currentChatUser._id, currentUser.token).then(
-			(data) => {
-				console.log(data);
-			}
+			(data) => {}
 		);
 	}, [messages]);
 

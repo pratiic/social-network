@@ -16,18 +16,18 @@ import ProfilePicture from "../profile-picture/profile-picture";
 const Message = ({ text, user, currentChatUser, createdAt, seen }) => {
 	const [currentUser, setCurrentUser] = useContext(CurrentUserContext);
 
-	console.log(seen);
-
 	return (
 		<div
-			className={`message ${user != currentUser._id ? "incoming" : null}`}
+			className={`message ${
+				user !== currentUser._id ? "incoming" : null
+			}`}
 		>
 			{/* <VerticalDotMenu className="icon" /> */}
 			<div className="text text-small">
 				{text}
 				<div className="message-info">
 					<p className="time text-smallest">{getTime(createdAt)}</p>
-					{user == currentUser._id ? (
+					{user === currentUser._id ? (
 						seen ? (
 							<DoubleTicksIcon className="icon" />
 						) : (
@@ -36,7 +36,7 @@ const Message = ({ text, user, currentChatUser, createdAt, seen }) => {
 					) : null}
 				</div>
 			</div>
-			{user != currentUser._id ? (
+			{user !== currentUser._id ? (
 				<ProfilePicture
 					profilePictureURL={currentChatUser.profilePictureURL}
 					profilePicture={currentChatUser.profilePicture}

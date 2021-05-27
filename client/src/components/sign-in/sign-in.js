@@ -105,8 +105,6 @@ class SignIn extends React.Component {
 	};
 
 	handleUserLogin = (user) => {
-		console.log(user);
-
 		const [
 			currentUser,
 			setCurrentUser,

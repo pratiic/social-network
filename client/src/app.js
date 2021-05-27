@@ -57,9 +57,7 @@ const App = ({ currentChatUser }) => {
 
 		socket.on("profileUpdated", (data) => {
 			if (currentUserProfile) {
-				console.log(data._id, currentUserProfile._id);
 				if (data._id === currentUserProfile._id) {
-					console.log(data);
 					setCurrentUserProfile({ ...data, user: currentUser });
 				}
 			}
@@ -70,9 +68,8 @@ const App = ({ currentChatUser }) => {
 		const socket = io("https://socialnetworkawesome.herokuapp.com/");
 
 		socket.on("chatAdded", (data) => {
-			console.log(currentUser);
 			if (currentUser) {
-				if (data.users.some((user) => user == currentUser._id)) {
+				if (data.users.some((user) => user === currentUser._id)) {
 					dispatch(increaseNewChatsNumber());
 					dispatch(showNotification(true, "you have a new chat"));
 				}
@@ -101,10 +98,9 @@ const App = ({ currentChatUser }) => {
 
 		socket.on("messageAdded", (data) => {
 			if (currentUser) {
-				if (data.to == currentUser._id) {
-					console.log(data);
+				if (data.to === currentUser._id) {
 					if (currentChatUser) {
-						if (data.user != currentChatUser._id) {
+						if (data.user !== currentChatUser._id) {
 							dispatch(addNewMessage(data));
 						}
 					} else {

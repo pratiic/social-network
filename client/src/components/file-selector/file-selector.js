@@ -9,8 +9,6 @@ import Button from "../button/button";
 const FileSelector = ({ changeHandler, filename, align }) => {
 	const inputRef = useRef();
 
-	console.log(filename);
-
 	const handleFileHandlerButtonClick = (event) => {
 		event.preventDefault();
 		inputRef.current.click();

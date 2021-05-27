@@ -39,15 +39,13 @@ const Comment = ({
 	const dispatch = useDispatch();
 
 	const handleLikeButtonClick = () => {
-		likeOrDislikeComment("like", _id, currentUser.token).then((data) => {
-			console.log(data);
-		});
+		likeOrDislikeComment("like", _id, currentUser.token).then((data) => {});
 	};
 
 	const handleDislikeButtonClick = () => {
-		likeOrDislikeComment("dislike", _id, currentUser.token).then((data) => {
-			console.log(data);
-		});
+		likeOrDislikeComment("dislike", _id, currentUser.token).then(
+			(data) => {}
+		);
 	};
 
 	const handleDeleteButtonClick = () => {
@@ -106,7 +104,7 @@ const Comment = ({
 						}`}
 					/>
 				</ContentControl>
-				{user._id == currentUser._id ? (
+				{user._id === currentUser._id ? (
 					<React.Fragment>
 						<ContentControl clickHandler={handleDeleteButtonClick}>
 							<TrashCanIcon className="icon" />

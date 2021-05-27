@@ -20,10 +20,6 @@ const NavControls = ({ showNavbar, newNotifications, newMessages }) => {
 		dispatch(toggleNavbar());
 	};
 
-	console.log(showNavbar);
-
-	console.log(location);
-
 	const [controls, setControls] = useState([
 		{
 			icon: <CommentIcon className="icon" />,
@@ -65,7 +61,6 @@ const NavControls = ({ showNavbar, newNotifications, newMessages }) => {
 
 	// useEffect(() => {
 	// 	controls.forEach((control) => {
-	// 		console.log(location);
 	// 		if (
 	// 			location.pathname.includes(control.value) &&
 	// 			control.value !== "menu"

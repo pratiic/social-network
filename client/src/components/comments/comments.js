@@ -40,15 +40,13 @@ const Comments = ({ postID, comments }) => {
 		const socket = io("https://socialnetworkawesome.herokuapp.com/");
 
 		socket.on("commentAdded", (data) => {
-			console.log(data);
-			if (data.post == postID && data.user != currentUser._id) {
+			if (data.post === postID && data.user != currentUser._id) {
 				setShowAlert(true);
 				setShowReload(true);
 			}
 		});
 
 		socket.on("commentLikedOrDisliked", (data) => {
-			console.log(data);
 			dispatch(updateComment(postID, data));
 		});
 

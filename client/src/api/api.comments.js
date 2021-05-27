@@ -2,7 +2,6 @@ const baseURL = "/api/comments";
 
 export const addComment = async (postID, comment, token) => {
 	const commentToAdd = JSON.stringify(comment);
-	console.log(commentToAdd);
 
 	const result = await fetch(`${baseURL}/${postID}`, {
 		method: "POST",

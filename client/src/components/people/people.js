@@ -32,10 +32,9 @@ const People = ({ people }) => {
 
 		fetchUsers();
 
-		const socket = io("http://localhost:5000");
+		const socket = io("https://socialnetworkawesome.herokuapp.com/");
 
 		socket.on("userAdded", (data) => {
-			console.log(data);
 			dispatch(setPerson(data));
 		});
 	}, []);

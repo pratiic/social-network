@@ -66,7 +66,7 @@ export const chatReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				messages: state.messages.map((message) => {
-					if (message._id == action.payload._id) {
+					if (message._id === action.payload._id) {
 						return { ...message, ...action.payload };
 					}
 
@@ -87,7 +87,7 @@ export const chatReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				newMessages: state.newMessages.filter(
-					(newMessage) => newMessage.chat != action.payload
+					(newMessage) => newMessage.chat !== action.payload
 				),
 			};
 		case "ADD_CHAT_TO_TOP":
@@ -101,7 +101,7 @@ export const chatReducer = (state = INITIAL_STATE, action) => {
 };
 
 const addChatToTop = (chatID, chats) => {
-	const chat = chats.find((chat) => chat._id == chatID);
-	const updatedChats = [chat, ...chats.filter((chat) => chat._id != chatID)];
+	const chat = chats.find((chat) => chat._id === chatID);
+	const updatedChats = [chat, ...chats.filter((chat) => chat._id !== chatID)];
 	return updatedChats;
 };

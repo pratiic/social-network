@@ -25,7 +25,7 @@ const Friends = ({ userID, currentlyViewedProfile }) => {
 	const params = useParams();
 
 	useEffect(() => {
-		if (params.id == currentUser._id) {
+		if (params.id === currentUser._id) {
 			setFriends(currentUserProfile.friends);
 			setUsername(currentUser.username);
 		} else {
@@ -38,7 +38,7 @@ const Friends = ({ userID, currentlyViewedProfile }) => {
 		<div className="friends">
 			<PageTitle
 				title={
-					params.id == currentUser._id
+					params.id === currentUser._id
 						? "your friends"
 						: `friends of ${username}`
 				}

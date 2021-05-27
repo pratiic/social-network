@@ -29,6 +29,5 @@ export const getNotificationMessage = (from, action, postID, type) => {
 		default:
 			return null;
 	}
-	console.log(notificationMessage);
 	return notificationMessage;
 };

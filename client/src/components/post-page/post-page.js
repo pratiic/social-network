@@ -30,7 +30,6 @@ const PostPage = ({ post }) => {
 
 		getPost(params.id, currentUser.token).then((data) => {
 			if (!data.error) {
-				console.log(data);
 				return dispatch(addPosts([data]));
 			}
 
@@ -60,7 +59,7 @@ const PostPage = ({ post }) => {
 const mapStateToProps = (state, props) => {
 	return {
 		post: state.posts.posts.find(
-			(post) => post._id == props.match.params.id
+			(post) => post._id === props.match.params.id
 		),
 	};
 };

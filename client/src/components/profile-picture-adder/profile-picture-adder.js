@@ -48,7 +48,6 @@ const ProfilePictureAdder = () => {
 	};
 
 	const handleFormSubmit = (event) => {
-		console.log("pratiic");
 		event.preventDefault();
 
 		setError("");
@@ -68,7 +67,6 @@ const ProfilePictureAdder = () => {
 			);
 
 			addProfilePicture(formData, currentUser.token).then((data) => {
-				console.log(data);
 				setUploading(false);
 				dispatch(hideModal());
 				if (data.error) {

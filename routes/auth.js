@@ -60,7 +60,6 @@ router.post("/login", async (request, response) => {
 	}
 
 	const user = await User.findOne({ email: request.body.email });
-	console.log(user);
 
 	if (!user) {
 		return response
@@ -81,7 +80,6 @@ router.post("/login", async (request, response) => {
 
 	const token = jwt.sign({ id: user._id }, process.env.SECRET);
 
-	console.log(user);
 	response.send({
 		_id: user._id,
 		username: user.username,
@@ -149,7 +147,6 @@ router.post(
 			const updatedUser = await User.findByIdAndUpdate(request.user, {
 				profilePicture: request.file.buffer,
 			});
-			console.log(updatedUser);
 			response.send({ message: "profile picture added" });
 		} catch (error) {
 			response.status(500).send({ error: error.message });

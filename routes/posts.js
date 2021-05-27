@@ -104,7 +104,6 @@ router.get("/post/:postID", auth, async (request, response) => {
 //get image of a post
 router.get("/image/:postID", async (request, response) => {
 	const post = await Post.findById(request.params.postID);
-	console.log(post);
 
 	if (!post || !post.image) {
 		return response.status(400).send({ error: "image not found" });

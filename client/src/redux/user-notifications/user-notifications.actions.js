@@ -24,3 +24,10 @@ export const increaseNewNotificationsNumber = () => {
 		type: "INCREASE_NEW_NOTIFICATIONS_NUMBER",
 	};
 };
+
+export const checkAndAddUserNotification = (
+	userNotification,
+	userNotifications
+) => {
+	return (dispatch) => {};
+};

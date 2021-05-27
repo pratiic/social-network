@@ -36,8 +36,6 @@ const ImagePostCreator = ({
 
 	useEffect(() => {
 		return () => {
-			console.log("pratiic");
-			console.log(editingPost, postType);
 			if (editingPost && postType === "image") {
 				dispatch(resetEditingFields());
 			}
@@ -58,7 +56,6 @@ const ImagePostCreator = ({
 	};
 
 	const handleFileChange = (event) => {
-		console.log(event.target.files[0]);
 		setFile(event.target.files[0]);
 		clearError();
 	};

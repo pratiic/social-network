@@ -48,7 +48,6 @@ const Post = ({
 	const handleLikeButtonClick = () => {
 		likeOrDislikePost("like", _id, currentUser.token).then((data) => {
 			if (data.message !== "already liked") {
-				console.log("liked");
 			}
 		});
 	};
@@ -56,7 +55,6 @@ const Post = ({
 	const handleDislikeButtonClick = () => {
 		likeOrDislikePost("dislike", _id, currentUser.token).then((data) => {
 			if (data.message !== "already disliked") {
-				console.log("disliked");
 			}
 		});
 	};
@@ -96,7 +94,7 @@ const Post = ({
 	};
 
 	const handleProfileInfoClick = () => {
-		if (user._id == currentUser._id) {
+		if (user._id === currentUser._id) {
 			history.push("/profile/view/me");
 		} else {
 			history.push(`/profile/view/${user._id}`);
